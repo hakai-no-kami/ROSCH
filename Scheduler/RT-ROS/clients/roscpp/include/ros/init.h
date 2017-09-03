@@ -205,6 +205,7 @@ ROSCPP_DECL CallbackQueue* getGlobalCallbackQueue();
  */
 ROSCPP_DECL void removeROSArgs(int argc, const char* const* argv, V_string& args_out);
 
+bool set_affinity(std::vector<int> v_core);
 }
 
 #endif

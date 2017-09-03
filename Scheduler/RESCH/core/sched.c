@@ -102,8 +102,8 @@ static void disable_load_balance(resch_task_t *rt)
 	/* save the CPU mask. */
 	cpumask_copy(&rt->cpumask, &rt->task->cpus_allowed);
 	/* temporarily disable migration. */
-	cpus_clear(mask);
-	cpu_set(smp_processor_id(), mask);
+	//cpus_clear(mask); //2017/9/3
+	//cpu_set(smp_processor_id(), mask); // 2019/9/3
 	cpumask_copy(&rt->task->cpus_allowed, &mask);
 	local_irq_enable();
 }
@@ -990,9 +990,9 @@ static void resch_task_init(resch_task_t *rt, int rid)
 	rt->rid = rid;
 	rt->task = current;
 	/* limit available CPUs by NR_RT_CPUS. */
-	cpus_clear(rt->cpumask);
+	//cpus_clear(rt->cpumask); //2017/9/3
 	for (cpu = 0; cpu < NR_RT_CPUS; cpu++) {
-		cpu_set(cpu, rt->cpumask);
+		//cpu_set(cpu, rt->cpumask); //2017/9/3
 	}
 	cpumask_and(&rt->task->cpus_allowed,
 				&rt->task->cpus_allowed, &rt->cpumask);

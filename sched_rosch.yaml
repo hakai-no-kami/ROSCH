@@ -1,0 +1,22 @@
+ - nodename: /listener
+   nodeindex: 21
+   core : 1 
+   sub_topic:
+   - /chatter
+   pub_topic:
+   sched_info: # please write run_time
+     - core : 1
+       priority : 30
+       run_time : 10
+
+ - nodename: /talker
+   nodeindex: 11
+   core : 2 
+   sub_topic:
+   pub_topic:
+   - /chatter
+   sched_info: # please write run_time
+     - core : 1
+       priority : 40
+       run_time : 10
+
