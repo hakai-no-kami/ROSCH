@@ -400,9 +400,11 @@ void Tracer::create_process_info(
       if(buf.find(find_next_pid.at(i)) != std::string::npos){
 			  start_time_s = split(trim(buf),delim);
 #ifdef CORE_DUMP
-				trace_info.prio = stoi(start_time_s[11].substr(10)); //index of array is 11 or 12
+				// If use RESCH/Scheduler, 99 is not necessary 
+				trace_info.prio = 99 - stoi(start_time_s[11].substr(10)); //index of array is 11 or 12
 #else
-        trace_info.prio = stoi(start_time_s[12].substr(10)); //index of array is 11 or 12
+				// If use RESCH/Scheduler, 99 is not necessary
+        trace_info.prio = 99 - stoi(start_time_s[12].substr(10)); //index of array is 11 or 12
 #endif
 				start_time_s = split(trim(buf),delim);
 #ifdef CORE_DUMP
