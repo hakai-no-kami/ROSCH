@@ -488,15 +488,18 @@ void init(const M_string &remappings, const std::string &name,
     std::vector<pid_t> v_pid;
     v_pid.push_back(0);
 
-//#ifndef USE_LINUX_SYSTEM_CALL
+#ifndef USE_LINUX_SYSTEM_CALL
 		cpu_set_t mask;
 		CPU_ZERO(&mask);
 
 		ros_rt_init("temp");
-		//set_affinity(sched_node_manager.getUseCores());
+
+		// for distribution system
+		set_affinity(sched_node_manager.getUseCores());
+
 	  ros_rt_set_scheduler(SCHED_FP);
 		ros_rt_set_priority(sched_node_manager.getPriority());
-#if 0
+#else
 		rosch::TaskAttributeProcesser task_attr_proc;
     task_attr_proc.setCoreAffinity(sched_node_manager.getUseCores());
     task_attr_proc.setRealtimePriority(v_pid, sched_node_manager.getPriority());
@@ -563,7 +566,7 @@ void init(const M_string &remappings, const std::string &name,
 bool set_affinity(std::vector<int> v_core)
 {
   if (v_core.size() == 0) {
-    std::cerr << "Failed to set CPU affinity" << std::endl;
+		std::cerr << "[node(" << getpid() <<")] Failed to set CPU affinity" << std::endl;
     return false;
   }
   cpu_set_t mask;
@@ -575,7 +578,7 @@ bool set_affinity(std::vector<int> v_core)
   }
   std::cout << std::endl;
   if (sched_setaffinity(0, sizeof(mask), &mask) == -1) {
-    std::cerr << "Failed to set CPU affinity" << std::endl;
+    std::cerr << " ** Failed to set CPU affinity" << std::endl;
     return false;
   }
   return true;
