@@ -8,4 +8,4 @@ sudo make install
 cd ../
 cd ./RT-ROS/
 make install
-#roscore
+roscore

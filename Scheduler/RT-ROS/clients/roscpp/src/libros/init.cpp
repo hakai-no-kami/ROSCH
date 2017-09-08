@@ -72,11 +72,7 @@
 #include "ros_rosch/publish_counter.h"
 #include "ros_rosch/task_attribute_processer.h"
 #include "ros_rosch/type.h"
-<<<<<<< HEAD
-#include "ros_rosch/bridge.hpp" 
-=======
 #include "ros_rosch/bridge.hpp"
->>>>>>> 0f66135a65aa8658f39ac1dc0c874862a576aa1b
 #if 0
 // RESCHECULER SCHED_DEADLINE
 // #define _GNU_SOURCE
@@ -492,36 +488,18 @@ void init(const M_string &remappings, const std::string &name,
     std::vector<pid_t> v_pid;
     v_pid.push_back(0);
 
-<<<<<<< HEAD
-#ifndef USE_LINUX_SYSTEM_CALL
+//#ifndef USE_LINUX_SYSTEM_CALL
 		cpu_set_t mask;
 		CPU_ZERO(&mask);
 
 		ros_rt_init("temp");
-		set_affinity(sched_node_manager.getUseCores());
+		//set_affinity(sched_node_manager.getUseCores());
 	  ros_rt_set_scheduler(SCHED_FP);
 		ros_rt_set_priority(sched_node_manager.getPriority());
-#else
+#if 0
 		rosch::TaskAttributeProcesser task_attr_proc;
     task_attr_proc.setCoreAffinity(sched_node_manager.getUseCores());
     task_attr_proc.setRealtimePriority(v_pid, sched_node_manager.getPriority());
-=======
-#ifdef USE_LINUX_SYS_CALL
-		rosch::TaskAttributeProcesser task_attr_proc;
-    task_attr_proc.setCoreAffinity(sched_node_manager.getUseCores());
-    task_attr_proc.setRealtimePriority(v_pid, sched_node_manager.getPriority());
-#else
-		cpu_set_t mask;
-		CPU_ZERO(&mask);
-		int prio = sched_node_manager.getPriority();
-		std::cout << "PID = " << getpid() <<
-			"prio = " << prio << std::endl;
-		ros_rt_init("temp");
-		set_affinity(sched_node_manager.getUseCores());
-		//ros_rt_set_scheduler(SCHED_FP);
-		ros_rt_set_priority(prio);
-
->>>>>>> 0f66135a65aa8658f39ac1dc0c874862a576aa1b
 #endif
     {
       std::cout << "==== Node Infomation ====" << std::endl
@@ -603,12 +581,6 @@ bool set_affinity(std::vector<int> v_core)
   return true;
 }
 
-<<<<<<< HEAD
-
-
-
-=======
->>>>>>> 0f66135a65aa8658f39ac1dc0c874862a576aa1b
 void init(int &argc, char **argv, const std::string &name, uint32_t options) {
   M_string remappings;
 
