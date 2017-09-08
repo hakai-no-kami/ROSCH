@@ -60,7 +60,7 @@ std::string to_string(T value)
     //convert the string stream into a string and return
     return os.str();
 }
-
+#if 0
 Analyzer::Analyzer(const std::string &node_name,
                    const std::string &topic,
                    const unsigned int &max_times,
@@ -86,7 +86,7 @@ Analyzer::Analyzer(const std::string &node_name,
         open_output_file(true);
     }
 }
-
+#endif
 Analyzer::~Analyzer()
 {
     if (is_in_node_graph() && is_target_topic())

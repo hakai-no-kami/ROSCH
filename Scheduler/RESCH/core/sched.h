@@ -93,8 +93,8 @@ void hrtimer_sleep_interval(resch_task_t *, unsigned long);
 /* migrate the given task in Linux. */
 static inline void __migrate_task(resch_task_t *rt, int cpu)
 {
-	cpus_clear(rt->cpumask);
-	cpu_set(cpu, rt->cpumask);
+	//cpus_clear(rt->cpumask); //gakky: temporary commentout
+	//cpu_set(cpu, rt->cpumask); //gakky:temporary commentout
 	set_cpus_allowed_ptr(rt->task, &rt->cpumask);
 }
 

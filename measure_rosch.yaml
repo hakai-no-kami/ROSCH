@@ -1,0 +1,7 @@
+ - nodename: /listener
+   nodeindex: 21
+   core : 1
+   sub_topic:
+   - /chatter
+   pub_topic:
+

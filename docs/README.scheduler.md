@@ -11,8 +11,8 @@ $ ./install.sh
 
 ## 2. How to use
 
-node_graph.yaml is listed ROS node informations. Please, change node_graph.yaml.
-After that, please run nodes that you wrote in node_graph.yaml.
+sched_rosch.yaml is listed ROS node informations. Please, change sched_rosch.yaml.
+After that, please run nodes that you wrote in sched_rosch.yaml.
 
 Required ROS node information:
   

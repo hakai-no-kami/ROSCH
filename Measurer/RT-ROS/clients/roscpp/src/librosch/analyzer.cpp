@@ -75,13 +75,14 @@ Analyzer::Analyzer(const std::string &node_name,
         core_count_manager_->set_core(graph_analyzer_->get_node_core(index));
         core_ = core_count_manager_->get_core();
         // Create dir.
-        std::string rosch_dir_name("rosch/");
+        std::string rosch_dir_name("./rosch/");
         mkdir(rosch_dir_name.c_str(), 0755);
         std::string dir_name(node_name);
         dir_name = remove_begin_slash(dir_name, "/");
         dir_name = replace_all(dir_name, "/", "__");
         dir_name = rosch_dir_name + dir_name;
         mkdir(dir_name.c_str(), 0755);
+				std::cout << dir_name << std::endl;
         // Create output file.
         open_output_file(true);
     }
@@ -227,7 +228,7 @@ void Analyzer::open_output_file(bool init)
     {
         ofs_.close();
     }
-    std::string rosch_dir_name("rosch/");
+    std::string rosch_dir_name("./rosch/");
     std::string dir_name(node_name_);
     dir_name = remove_begin_slash(dir_name, "/");
     dir_name = replace_all(dir_name, "/", "__");
@@ -237,6 +238,7 @@ void Analyzer::open_output_file(bool init)
     file_name = remove_begin_slash(file_name, "/");
     file_name = replace_all(file_name, "/", "__");
     file_name = dir_name + "/" + file_name;
+		std::cout << file_name << std::endl;
     ofs_.open(file_name.c_str());
 }
 
