@@ -110,13 +110,15 @@ void Tracer::mount(bool mode, std::string userPass){
 
   first_com += (userPass + second_com);
   ret = system(first_com.c_str());
-	
+
+#if 0	
 	if(ret != 0){
 		std::cout << "mount error" << std::endl;
     std::cout << "may be password is incorrect" << std::endl;
 		std::cout << "exit" << std::endl;
 		exit(1);
 	}
+#endif
 
 }
 
@@ -137,13 +139,15 @@ void Tracer::set_tracing_on(int mode, std::string userPass){
   }
   
 	ret = system(first_com.c_str());
-	
+
+#if 0
 	if(ret != 0){
 		std::cout << "error: set_tracing_on" << std::endl;
     std::cout << "may be password is incorrect" << std::endl;
 		std::cout << "exit" << std::endl;
 		exit(1);
 	}
+#endif
 
 }
 
@@ -165,12 +169,14 @@ void Tracer::set_trace(int mode, std::string userPass){
 	
   ret = system(first_com.c_str());
 
+#if 0
 	if(ret != 0){
 		std::cout << "error: set_trace" << std::endl;
     std::cout << "may be password is incorrect" << std::endl;
 		std::cout << "exit" << std::endl;
 		exit(1);
 	}
+#endif
 
 }
 
@@ -192,12 +198,14 @@ void Tracer::set_events_enable(int mode, std::string userPass){
   
 	ret = system(first_com.c_str());
 	
+#if 0
 	if(ret != 0){
 		std::cout << "error: set_events_enable" << std::endl;
     std::cout << "may be password is incorrect" << std::endl;
 		std::cout << "exit" << std::endl;
 		exit(1);
 	}
+#endif
 	
 }
 
@@ -211,12 +219,14 @@ void Tracer::set_current_tracer(std::string mode, std::string userPass){
 
   ret = system(first_com.c_str());
 		
+#if 0
 	if(ret != 0){
 		std::cout << "error: set_current_tracer" << std::endl;
     std::cout << "may be password is incorrect" << std::endl;
 		std::cout << "exit" << std::endl;
 		exit(1);
 	}
+#endif
 
 		
 }
@@ -230,12 +240,14 @@ void Tracer::set_event(std::string mode, std::string userPass){
   first_com += (userPass + second_com + mode + third_com);
   ret = system(first_com.c_str());
 			
+#if 0
 	if(ret != 0){
 		std::cout << "error: set_event" << std::endl;
     std::cout << "may be password is incorrect" << std::endl;
 		std::cout << "exit" << std::endl;
 		exit(1);
 	}
+#endif
 
 }
 
@@ -246,12 +258,14 @@ void Tracer::start_ftrace(std::string userPass){
   start_com += (userPass + second_com);
   ret = system(start_com.c_str());
 			
+#if 0
 	if(ret != 0){
 		std::cout << "error: start_ftrace" << std::endl;
     std::cout << "may be password is incorrect" << std::endl;
 		std::cout << "exit" << std::endl;
 		exit(1);
 	}
+#endif
 
 }
 
@@ -262,12 +276,14 @@ void Tracer::output_log(std::string userPass){
   first_com += userPass + second_com;
   ret = system(first_com.c_str());
 			
+#if 0
 	if(ret != 0){
 		std::cout << "error: output_log" << std::endl;
     std::cout << "may be password is incorrect" << std::endl;
 		std::cout << "exit" << std::endl;
 		exit(1);
 	}
+#endif
 
 }
 
@@ -285,13 +301,14 @@ void Tracer::filter_pid(bool mode, std::string userPass){
   first_com += (pids.str() + third_com);
   ret = system(first_com.c_str());
 
-			
+#if 0
 	if(ret != 0){
 		std::cout << "error: filter_pid" << std::endl;
     std::cout << "may be password is incorrect" << std::endl;
 		std::cout << "exit" << std::endl;
 		exit(1);
 	}
+#endif
 
 
   if(mode == true){
@@ -308,24 +325,29 @@ void Tracer::filter_pid(bool mode, std::string userPass){
 
       ret = system(first_com.c_str());
 			
+#if 0
 			if(ret != 0){
 				std::cout << "error: filter_pid" << std::endl;
 				std::cout << "may be password is incorrect" << std::endl;
 				std::cout << "exit" << std::endl;
 				exit(1);
 			}
+#endif
 
       first_com = "echo ";
     }
 
   }else{
     ret = system(first_com.c_str());
+
+#if 0
 		if(ret != 0){
 			std::cout << "error: filter_pid" << std::endl;
 			std::cout << "may be password is incorrect" << std::endl;
 			std::cout << "exit" << std::endl;
 			exit(1);
 		}
+#endif
 	}
 }
 

@@ -93,9 +93,15 @@ void hrtimer_sleep_interval(resch_task_t *, unsigned long);
 /* migrate the given task in Linux. */
 static inline void __migrate_task(resch_task_t *rt, int cpu)
 {
+<<<<<<< HEAD
 	//cpus_clear(rt->cpumask); //gakky: temporary commentout
 	//cpu_set(cpu, rt->cpumask); //gakky:temporary commentout
 	set_cpus_allowed_ptr(rt->task, &rt->cpumask);
+=======
+	//cpus_clear(rt->cpumask); //2017/9/3
+	//cpu_set(cpu, rt->cpumask); //2017/9/3
+	set_cpus_allowed_ptr(rt->task, &rt->cpumask); 
+>>>>>>> 0f66135a65aa8658f39ac1dc0c874862a576aa1b
 }
 
 /* round up function for unsigned long type. */
