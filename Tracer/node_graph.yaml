@@ -1,11 +1,8 @@
  - nodename: listener
-   sub_topic:
-   pub_topic:
-   - talker
    deadline: 1
 
  - nodename: talker
-   sub_topic:
-   - listener
-   pub_topic:
+   deadline: 1
+
+ - nodename: ndt_matching
    deadline: 1

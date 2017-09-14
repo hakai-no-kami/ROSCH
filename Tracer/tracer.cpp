@@ -29,22 +29,26 @@ void Tracer::load_config_(const std::string &filename) {
 
     for (unsigned int i(0); i < node_list.size(); i++) {
       const YAML::Node node_name = node_list[i]["nodename"];
-      const YAML::Node node_subtopic = node_list[i]["sub_topic"];
+#ifdef TOPIC_INFO
+			const YAML::Node node_subtopic = node_list[i]["sub_topic"];
       const YAML::Node node_pubtopic = node_list[i]["pub_topic"];
+#endif 
 			const YAML::Node node_deadline = node_list[i]["deadline"];
 
       node_info_t node_info;
       node_info.name = node_name.as<std::string>();
 
       node_info.v_subtopic.resize(0);
+			node_info.v_pubtopic.resize(0); 
+
+#ifdef TOPIC_INFO
       for (int j(0); (size_t)j < node_subtopic.size(); ++j) {
         node_info.v_subtopic.push_back(node_subtopic[j].as<std::string>());
       }
-
-      node_info.v_pubtopic.resize(0);
       for (int j(0); (size_t)j < node_pubtopic.size(); ++j) {
         node_info.v_pubtopic.push_back(node_pubtopic[j].as<std::string>());
       }
+#endif
 
 			node_info.deadline = node_deadline.as<double>();
       node_info.pid = get_pid(node_info.name);
@@ -61,18 +65,19 @@ unsigned int Tracer::get_pid(std::string name){
   FILE *pid_fp;
   unsigned int pid=0;
   char buf[1024];
-  std::string pidof_x = "pidof ";
-  pidof_x += name;
+	std::string ps = "ps --no-heading -C ";
+	std::string args = " -o pid";
+  ps += (name + args);
 
-  if ((pid_fp=popen(pidof_x.c_str(),"r")) ==NULL)
+  if ((pid_fp=popen(ps.c_str(),"r")) ==NULL)
     exit(1);
 
   while(fgets(buf, sizeof(buf), pid_fp) != NULL)
     pid = atoi(buf);
 
-    pclose(pid_fp);
-
-    return pid;
+  pclose(pid_fp);
+   
+	return pid;
 }
 
 void Tracer::setup(std::string userPass){
@@ -400,13 +405,13 @@ void Tracer::create_process_info(
       if(buf.find(find_next_pid.at(i)) != std::string::npos){
 			  start_time_s = split(trim(buf),delim);
 #ifdef CORE_DUMP
-				// If use RESCH/Scheduler, 99 is not necessary 
-				trace_info.prio = 99 - stoi(start_time_s[11].substr(10)); //index of array is 11 or 12
+				trace_info.prio = stoi(start_time_s[11].substr(10)); //index of array is 11 or 12
 #else
-				// If use RESCH/Scheduler, 99 is not necessary
-        trace_info.prio = 99 - stoi(start_time_s[12].substr(10)); //index of array is 11 or 12
+        trace_info.prio = stoi(start_time_s[12].substr(10)); //index of array is 11 or 12
 #endif
 				start_time_s = split(trim(buf),delim);
+
+
 #ifdef CORE_DUMP
         start_time_i = strtod(start_time_s[2].c_str(),NULL); //index of array is 2 or 3
 #else
@@ -420,8 +425,10 @@ void Tracer::create_process_info(
 				for(int j(0); j<(int)v_node_info_.size();j++){
 				  if(trace_info.pid ==  v_node_info_.at(i).pid){
 					  trace_info.name = v_node_info_.at(i).name;
+#ifdef TOPIC_INFO
 						trace_info.v_subtopic = v_node_info_.at(i).v_subtopic;
 						trace_info.v_pubtopic = v_node_info_.at(i).v_pubtopic; 
+#endif
 					  trace_info.deadline = v_node_info_.at(i).deadline;
 					}
 				}
@@ -444,13 +451,14 @@ void Tracer::create_process_info(
   //sort by start_time
   //std::sort(v_trace_info.begin(),v_trace_info.end());
 
+#define PRINT_DEBUG
 #ifdef PRINT_DEBUG
   for(int i=0;i<(int)v_trace_info.size();i++){
-    std::cout<< v_trace_info[i].name << " " << v_trace_info[i].pid;
-    printf(" core: %d, s_time: %f. r_time: %f\n"
+    std::cout<< v_trace_info[i].name << " pid:" << v_trace_info[i].pid;
+    printf(" core:%d, s_time:%f, r_time:%f\n"
 				,v_trace_info[i].core
         ,v_trace_info[i].start_time
-				, v_trace_info[i].runtime);
+				,v_trace_info[i].runtime);
   }
 #endif
 }

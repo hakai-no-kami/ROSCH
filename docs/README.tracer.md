@@ -1,6 +1,6 @@
 # Using Tracer
 
-Tracer supports tracing and vizualization for ROS nodes on a per process basis.
+Tracer supports tracing and vizualization for processes including ROS nodes.
 
 ## 1. How to Install
 
@@ -11,11 +11,15 @@ $ make
 
 ## 2. How to use
 
-Please list the nodes you want to trace.
-After that, please run Tracer, and GUI is launched.
+Please list the nodes to trace_rosch.yaml.
+After that, please run the following command.
+
+```sh
+$ ./Tracer
+``` 
 
 Required ROS node information:
 
- * `nodename`: the name of ROS node
- * `sub_topic`: topic for subscribe (Not compulsory)
- * `pub_topic`: topic for publish  (Not compulsory)
+ * `nodename`: the name of ROS node (process)
+ * `deadline`: period (Not compulsory)
+
