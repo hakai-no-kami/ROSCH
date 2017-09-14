@@ -1,6 +1,6 @@
 #!/bin/sh
 
-cp ../measure_rosch.yaml /tmp/
+cp ./measure_rosch.yaml /tmp/
 cd ./RESCH
 sudo make uninstall
 make

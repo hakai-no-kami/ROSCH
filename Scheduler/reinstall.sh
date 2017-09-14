@@ -1,6 +1,6 @@
 #!/bin/sh
 
-cp ../sched_rosch.yaml /tmp/
+cp ./sched_rosch.yaml /tmp/
 cd ./RESCH
 sudo make uninstall
 make
