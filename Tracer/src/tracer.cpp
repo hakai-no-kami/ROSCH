@@ -451,7 +451,6 @@ void Tracer::create_process_info(
   //sort by start_time
   //std::sort(v_trace_info.begin(),v_trace_info.end());
 
-#define PRINT_DEBUG
 #ifdef PRINT_DEBUG
   for(int i=0;i<(int)v_trace_info.size();i++){
     std::cout<< v_trace_info[i].name << " pid:" << v_trace_info[i].pid;
