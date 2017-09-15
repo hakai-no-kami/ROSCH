@@ -178,11 +178,7 @@ void checkForShutdown() {
     // Since this gets run from within a mutex inside PollManager, we need to
     // prevent ourselves from deadlocking with
     // another thread that's already in the middle of shutdown()
-
-#ifndef USE_LINUX_SYSTEM_CALL
-		ros_rt_exit();
-#endif
-    boost::recursive_mutex::scoped_try_lock lock(g_shutting_down_mutex,
+		boost::recursive_mutex::scoped_try_lock lock(g_shutting_down_mutex,
                                                  boost::defer_lock);
     while (!lock.try_lock() && !g_shutting_down) {
       ros::WallDuration(0.001).sleep();
@@ -666,7 +662,11 @@ void shutdown() {
   else
     g_shutting_down = true;
 
-  ros::console::shutdown();
+#ifndef USE_LINUX_SYSTEM_CALL
+		ros_rt_exit();
+#endif
+
+	ros::console::shutdown();
 
   g_global_queue->disable();
   g_global_queue->clear();
