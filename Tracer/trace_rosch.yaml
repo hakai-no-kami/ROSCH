@@ -3,6 +3,3 @@
 
  - nodename: talker
    deadline: 1
-
- - nodename: ndt_matching
-   deadline: 1
