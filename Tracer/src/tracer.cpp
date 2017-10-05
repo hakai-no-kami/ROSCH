@@ -11,6 +11,7 @@
 #include "yaml-cpp/yaml.h"
 #include <iostream>
 #include <sstream>
+#include <string.h>
 
 using namespace SchedViz;
 
@@ -406,29 +407,33 @@ void Tracer::create_process_info(
     std::ifstream _trace_log("./ftrace.log");
 
     while(std::getline(_trace_log,buf)){
-			std::cout <<  buf << std::endl;
 
       // start time
       if(buf.find(find_next_pid.at(i)) != std::string::npos){
 			  start_time_s = split(trim(buf),delim);
-#ifdef CORE_DUMP
-				trace_info.prio = stoi(start_time_s[11].substr(10)); //index of array is 11 or 12
-#else
-        trace_info.prio = stoi(start_time_s[12].substr(10)); //index of array is 11 or 12
-#endif
+        
+				/* Get priority and launch time */
+				if(strncmp("next_prio",start_time_s[11].c_str(),9)==0){
+				  trace_info.prio = stoi(start_time_s[11].substr(10));
+				}else{
+					trace_info.prio = stoi(start_time_s[12].substr(10)); // index of array is 11 or 12
+				}
+
+				/* Get launch time */
 				start_time_s = split(trim(buf),delim);
+				if (strtod(start_time_s[3].c_str(),NULL) != 0){
+				  start_time_i = strtod(start_time_s[3].c_str(),NULL);
+			  }else{
+					start_time_i = strtod(start_time_s[2].c_str(),NULL); //index of array is 2 or 3
+				}
+				trace_info.start_time = start_time_i;
 
-
-#ifdef CORE_DUMP
-        start_time_i = strtod(start_time_s[2].c_str(),NULL); //index of array is 2 or 3
-#else
-				start_time_i = strtod(start_time_s[3].c_str(),NULL); //index of array is 2 or 3
-#endif
+				/* Get name, pid and core */
         trace_info.name = find_next_pid.at(i).substr(9); //pid
         trace_info.pid = std::stoi(find_next_pid.at(i).substr(9)); //pid
-				trace_info.start_time = start_time_i;
         trace_info.core = ctoi(start_time_s[0]);
 
+				/* Set dependancies and deadline */
 				for(int j(0); j<(int)v_node_info_.size();j++){
 				  if(trace_info.pid ==  v_node_info_.at(i).pid){
 					  trace_info.name = v_node_info_.at(i).name;
@@ -441,23 +446,23 @@ void Tracer::create_process_info(
 				}
       }
 
-      // end time
+      /* Get runtime */
       if(buf.find(find_prev_pid.at(i)) != std::string::npos){
         finish_time_s = split(trim(buf),delim);
-#ifdef CORE_DUMP
-        finish_time_i = strtod(finish_time_s[2].c_str(),NULL); //index of array is 2 or 3
-#else
 				finish_time_i = strtod(finish_time_s[3].c_str(),NULL); //index of array is 2 or 3
-#endif
-        trace_info.runtime = finish_time_i - start_time_i;
+				if(finish_time_i - start_time_i > 0)
+				  trace_info.runtime = finish_time_i - start_time_i;
+				else
+					trace_info.runtime = 0;
+
         v_trace_info.push_back(trace_info);
       }
     }
   }
 
-  //sort by start_time
+  /* sort by start_time */
   //std::sort(v_trace_info.begin(),v_trace_info.end());
-#define PRINT_DEBUG
+
 #ifdef PRINT_DEBUG
   for(int i=0;i<(int)v_trace_info.size();i++){
     std::cout<< v_trace_info[i].name << " pid:" << v_trace_info[i].pid;
