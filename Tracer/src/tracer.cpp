@@ -76,7 +76,14 @@ unsigned int Tracer::get_pid(std::string name){
     pid = atoi(buf);
 
   pclose(pid_fp);
-   
+  
+	/* Specified PID is not detected */
+	if(pid == 0){
+		std::cout << "Specified node's PID is not detected" << std::endl;
+		std::cout << "Please check node name in trace_rosch.yaml" << std::endl;
+		exit(1);
+	}
+
 	return pid;
 }
 
@@ -379,8 +386,7 @@ void Tracer::extract_period(){
     find_next_pids.push_back(next_pid.str());
   }
 
-create_process_info(find_prev_pids, find_next_pids);
-
+  create_process_info(find_prev_pids, find_next_pids);
 }
 
 
@@ -400,6 +406,7 @@ void Tracer::create_process_info(
     std::ifstream _trace_log("./ftrace.log");
 
     while(std::getline(_trace_log,buf)){
+			std::cout <<  buf << std::endl;
 
       // start time
       if(buf.find(find_next_pid.at(i)) != std::string::npos){
@@ -450,7 +457,7 @@ void Tracer::create_process_info(
 
   //sort by start_time
   //std::sort(v_trace_info.begin(),v_trace_info.end());
-
+#define PRINT_DEBUG
 #ifdef PRINT_DEBUG
   for(int i=0;i<(int)v_trace_info.size();i++){
     std::cout<< v_trace_info[i].name << " pid:" << v_trace_info[i].pid;
