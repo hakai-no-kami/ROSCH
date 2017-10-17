@@ -272,12 +272,13 @@ void Analyzer::set_rt()
     }
     is_aleady_rt_ = true;
 
+		/* you can also set SCHED_EDF */
+		ros_rt_set_scheduler(SCHED_FP);
     cpu_set_t mask;
     CPU_ZERO(&mask);
     int index = graph_analyzer_->get_node_index(node_name_);
     set_affinity(core_count_manager_->get_core());
     int prio = 99;
-    ros_rt_set_scheduler(SCHED_FP); /* you can also set SCHED_EDF. */
     ros_rt_set_priority(prio);
 }
 

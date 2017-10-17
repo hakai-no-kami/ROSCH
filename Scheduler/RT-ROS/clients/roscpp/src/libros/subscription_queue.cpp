@@ -213,11 +213,13 @@ void SubscriptionQueue::waitAppThread() {
 
 
 #ifndef USE_LINUX_SYSTEM_CALL
+#ifdef HYPERPERIOD_MODE
 	cpu_set_t mask;
 	CPU_ZERO(&mask);
 
 	set_affinity(sched_node_manager_.getUseCores());
 	ros_rt_set_priority(sched_node_manager_.getPriority());
+#endif
 #endif
 	
   if (ret != 1) {
