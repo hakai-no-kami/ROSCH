@@ -30,10 +30,8 @@ void Tracer::load_config_(const std::string &filename) {
 
     for (unsigned int i(0); i < node_list.size(); i++) {
       const YAML::Node node_name = node_list[i]["nodename"];
-#ifdef TOPIC_INFO
 			const YAML::Node node_subtopic = node_list[i]["sub_topic"];
       const YAML::Node node_pubtopic = node_list[i]["pub_topic"];
-#endif 
 			const YAML::Node node_deadline = node_list[i]["deadline"];
 
       node_info_t node_info;
@@ -42,14 +40,12 @@ void Tracer::load_config_(const std::string &filename) {
       node_info.v_subtopic.resize(0);
 			node_info.v_pubtopic.resize(0); 
 
-#ifdef TOPIC_INFO
       for (int j(0); (size_t)j < node_subtopic.size(); ++j) {
         node_info.v_subtopic.push_back(node_subtopic[j].as<std::string>());
       }
       for (int j(0); (size_t)j < node_pubtopic.size(); ++j) {
         node_info.v_pubtopic.push_back(node_pubtopic[j].as<std::string>());
       }
-#endif
 
 			node_info.deadline = node_deadline.as<double>();
       node_info.pid = get_pid(node_info.name);
@@ -414,9 +410,9 @@ void Tracer::create_process_info(
         
 				/* Get priority and launch time */
 				if(strncmp("next_prio",start_time_s[11].c_str(),9)==0){
-				  trace_info.prio = stoi(start_time_s[11].substr(10));
+				  trace_info.prio = std::stoi(start_time_s[11].substr(10));
 				}else{
-					trace_info.prio = stoi(start_time_s[12].substr(10)); // index of array is 11 or 12
+					trace_info.prio = std::stoi(start_time_s[12].substr(10)); // index of array is 11 or 12
 				}
 
 				/* Get launch time */
@@ -437,10 +433,8 @@ void Tracer::create_process_info(
 				for(int j(0); j<(int)v_node_info_.size();j++){
 				  if(trace_info.pid ==  v_node_info_.at(i).pid){
 					  trace_info.name = v_node_info_.at(i).name;
-#ifdef TOPIC_INFO
 						trace_info.v_subtopic = v_node_info_.at(i).v_subtopic;
 						trace_info.v_pubtopic = v_node_info_.at(i).v_pubtopic; 
-#endif
 					  trace_info.deadline = v_node_info_.at(i).deadline;
 					}
 				}
