@@ -9,7 +9,7 @@ using namespace rosch;
 
 NodesInfo::NodesInfo() : v_node_info_(0), config_() {
   std::string filename(config_.get_configpath());
-  loadConfig(std::string("/tmp/sched_rosch.yaml"));
+  loadConfig(std::string("/tmp/scheduler_rosch.yaml"));
   //    loadConfig(filename);
 }
 

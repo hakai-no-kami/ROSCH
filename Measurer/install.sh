@@ -1,6 +1,6 @@
 #!/bin/sh
 
-cp ./measure_rosch.yaml /tmp/
+cp ../YAMLs/measure_rosch.yaml /tmp/
 cd ./RESCH
 make
 sudo make install

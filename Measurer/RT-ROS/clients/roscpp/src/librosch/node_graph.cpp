@@ -9,7 +9,7 @@ static const int PATH_MAX(128);
 
 NodeGraph::NodeGraph() : v_node_info_(0) {
   std::string self_path(get_selfpath());
-  load_config(std::string("/tmp/measure_rosch.yaml"));
+  load_config(std::string("/tmp/measurer_rosch.yaml"));
 }
 
 NodeGraph::NodeGraph(const std::string &filename) : v_node_info_(0) {

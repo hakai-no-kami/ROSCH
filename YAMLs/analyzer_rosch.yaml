@@ -1,0 +1,12 @@
+- nodename: /vel_pose_mux
+  nodeindex: 33
+  core : 1
+  sub_topic:
+  - /ndt_pose
+  pub_topic:
+  - /current_pose
+  deadline: 0
+  period: 0
+  run_time: 12
+  
+

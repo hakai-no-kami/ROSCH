@@ -11,12 +11,12 @@ Config::Config(const std::string &config_file, const std::string &spec_file)
 Config::~Config() {}
 std::string Config::get_configpath() {
   std::string self_path(get_selfpath());
-  return get_dirname(self_path) + "/../../" + config_file_;
+  return get_dirname(self_path) + "/../../YAMLs/" + config_file_;
 }
 
 std::string Config::get_specpath() {
   std::string self_path(get_selfpath());
-  return get_dirname(self_path) + "/../../" + spec_file_;
+  return get_dirname(self_path) + "/../../YAMLs/" + spec_file_;
 }
 
 std::string Config::get_dirname(const std::string &path) {
