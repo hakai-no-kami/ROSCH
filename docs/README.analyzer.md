@@ -11,7 +11,7 @@ $ make
 
 ## 2. How to use
 
-Analyzer dipicts a graph and a scheduling result. Note that Analyzer refers to node_graph.yaml Please, change it.
+Analyzer dipicts a graph and a scheduling result. Note that Analyzer refers to $(TOPDIR)/analyzer_rosch.yaml Pleas, change it.
 
 Required ROS node information:
 

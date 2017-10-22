@@ -11,7 +11,7 @@ $ make
 
 ## 2. How to use
 
-Please list the nodes you want to trace on the trace_rosch.yaml.
+Please list the nodes you want to trace on the $(TOPDIR)/trace_rosch.yaml.
 After that, please run following commands.
 
 ```sh
@@ -22,6 +22,8 @@ $ ./Tracer
 Required ROS node information:
 
  * `nodename`: the name of ROS node (process)
+ * __sub_topic__ : topic for subscribe
+ * __pub_topic__ : topic for publish
  * `deadline`: period  (Not compulsory)
 
 ## 3. If core dump occurs

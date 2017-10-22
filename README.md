@@ -2,10 +2,11 @@
 Real-time extension modules for ROS.
 The supported functions include:
 
-- __Measurer__  : Measurement of execution time for ROS nodes
-- __Analyzer__  : Analysis for shceduling ROS nodes with Fixed-Priority policy.
-- __Scheduler__ : Real-time Fixed-Priority scheduling depended on Analyzer. 
-- __Tracer__    : Visualization for ROS nodes.  
+- __Measurer__  : Measure the execution time for ROS nodes
+- __Analyzer__  : Analyze ROS nodes (Offline).
+- __Scheduler__ : Schedule ROS nodes with Fixed-Priority policy. 
+- __Tracer__    : Visualize ROS nodes.  
+- __Tool__      : Support generating YAML files.  
 
 ## Requirements
 - ROS indigo(Ubuntu 14.04)

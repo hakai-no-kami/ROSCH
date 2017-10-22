@@ -11,8 +11,8 @@ $ ./install.sh
 
 ## 2. How to use
 
-sched_rosch.yaml is listed ROS node informations. Please, change sched_rosch.yaml.
-After that, please run nodes that you wrote in sched_rosch.yaml.
+$(TOPDIR)/scheduler_rosch.yaml is listed ROS node informations. Please, change scheduler_rosch.yaml.
+After that, please run nodes that you wrote in scheduler_rosch.yaml.
 
 Required ROS node information:
   
