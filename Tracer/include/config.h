@@ -6,7 +6,7 @@
 namespace SchedViz {
 class Config {
 public:
-  Config(const std::string &config_file = "../YAMLs/tracer_rosch.yaml");
+  Config(const std::string &config_file = "tracer_rosch.yaml");
   ~Config();
   std::string get_configpath();
 

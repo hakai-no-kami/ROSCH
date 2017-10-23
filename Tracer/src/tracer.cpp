@@ -410,9 +410,9 @@ void Tracer::create_process_info(
         
 				/* Get priority and launch time */
 				if(strncmp("next_prio",start_time_s[11].c_str(),9)==0){
-				  trace_info.prio = std::stoi(start_time_s[11].substr(10));
+				  trace_info.prio = stoi(start_time_s[11].substr(10));
 				}else{
-					trace_info.prio = std::stoi(start_time_s[12].substr(10)); // index of array is 11 or 12
+					trace_info.prio = stoi(start_time_s[12].substr(10)); // index of array is 11 or 12
 				}
 
 				/* Get launch time */
