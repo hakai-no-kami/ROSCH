@@ -1,5 +1,0 @@
- - nodename: listener
-   deadline: 1
-
- - nodename: talker
-   deadline: 1

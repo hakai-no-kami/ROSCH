@@ -19,11 +19,11 @@ void Parser::create_yaml_file(std::string name,
         std::vector<std::string> pub_topic,
         std::vector<std::string> sub_topic){
 
-	std::string file_name = "./measure_rosch.yaml";
+	std::string file_name = "../../YAMLs/measure_rosch.yaml";
   YAML::Emitter out;
   out << YAML::BeginSeq;
   out << YAML::BeginMap;
-  out << YAML::Key << "name";
+  out << YAML::Key << "nodename";
   out << YAML::Value << name;
   out << YAML::Key << "nodeindex";
   out << YAML::Value << index;
@@ -69,16 +69,17 @@ void Parser::create_yaml_file(
 		std::vector<std::string> pub_topic,
 		std::vector<std::string> sub_topic,
 		int deadline,
-		int period
+		int period,
+		int run_time
 		)
 {
-	std::string file_name = "./analyzer_rosch.yaml";
+	std::string file_name = "../../YAMLs/analyzer_rosch.yaml";
   YAML::Emitter out;
   out << YAML::BeginSeq;
   out << YAML::BeginMap;
-  out << YAML::Key << "name";
+  out << YAML::Key << "nodename";
   out << YAML::Value << name;
-  out << YAML::Key << "index";
+  out << YAML::Key << "nodeindex";
 	out << YAML::Value << index;
 	out << YAML::Key << "core";
 	out << YAML::Value << core;
@@ -109,6 +110,8 @@ void Parser::create_yaml_file(
 	out << YAML::Value << deadline;
 	out << YAML::Key << "period";
 	out << YAML::Value << period;
+	out << YAML::Key << "run_time";
+	out << YAML::Value << run_time;
 
   out << YAML::EndMap;
   out << YAML::EndSeq;
@@ -126,11 +129,11 @@ void Parser::create_yaml_file(std::string name,
         std::vector<std::string> sub_topic,
 				std::vector<SchedInfo> sched_infos){
 
-	std::string file_name = "./scheduler_rosch.yaml";
+	std::string file_name = "../../YAMLs/scheduler_rosch.yaml";
   YAML::Emitter out;
   out << YAML::BeginSeq;
   out << YAML::BeginMap;
-  out << YAML::Key << "name";
+  out << YAML::Key << "nodename";
   out << YAML::Value << name;
 	out << YAML::Key << "core";
 	out << YAML::Value << core;
@@ -162,7 +165,7 @@ void Parser::create_yaml_file(std::string name,
     out << YAML::BeginSeq << YAML::BeginMap;
     out << YAML::Key << "core" << YAML::Value << sched_infos.at(i).core;
     out << YAML::Key << "priority" << YAML::Value << sched_infos.at(i).priority;
-    out << YAML::Key << "runtime" << YAML::Value << sched_infos.at(i).runtime;
+    out << YAML::Key << "run_time" << YAML::Value << sched_infos.at(i).runtime;
     out << YAML::EndMap << YAML::EndSeq;
 	}
   out << YAML::EndMap;
@@ -181,12 +184,12 @@ void Parser::create_yaml_file(
 		std::vector<std::string> sub_topic,
 		int deadline){
 
-	std::string file_name = "./tracer_rosch.yaml";
+	std::string file_name = "../../YAMLs/tracer_rosch.yaml";
   YAML::Emitter out;
 
   out << YAML::BeginSeq;
   out << YAML::BeginMap;
-  out << YAML::Key << "name";
+  out << YAML::Key << "nodename";
   out << YAML::Value << name;
 
   out << YAML::Key << "sub_topic";
@@ -339,7 +342,8 @@ void Parser::create_file(std::vector<node_info_t> infos, int mode){
 							infos[i].depend.pub_topic,
 							infos[i].depend.sub_topic,
 							infos[i].deadline,
-							0 /* period */
+							0, /* period */
+							0 /* run_time */
 							);
 					std::cout << "[Analyzer] Add: " << infos[i].name.c_str() << std::endl;
 					break;
@@ -407,16 +411,16 @@ void Parser::file_clear(int mode){
 
 	switch(mode){
 		case 1:
-			file_name = "./measure_rosch.yaml";
+			file_name = "../../YAMLs/measure_rosch.yaml";
 			break;
 		case 2:
-			file_name = "./analyzer_rosch.yaml";
+			file_name = "../../YAMLs/analyzer_rosch.yaml";
 			break;
 		case 3:
-			file_name = "./scheduler_rosch.yaml";
+			file_name = "../../YAMLs/scheduler_rosch.yaml";
 			break;
 		case 4:
-			file_name = "./tracer_rosch.yaml";
+			file_name = "../../YAMLs/tracer_rosch.yaml";
 			break;
 		default:
 			break;

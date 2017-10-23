@@ -31,7 +31,8 @@ private:
             std::vector<std::string> pub_topic,
             std::vector<std::string> sub_topic,
 						int deadline,
- 						int period
+ 						int period,
+						int run_time
             );
 
     /* for Scheduler */
