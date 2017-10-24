@@ -28,6 +28,7 @@ public:
 
     QGroupBox *Mode;
     QGroupBox *NodeListViewer;
+		QGroupBox *Previewer;
 		QGroupBox *Creator;
     int mode_flag;
     std::vector<std::string> topic_list;
@@ -41,6 +42,7 @@ public slots:
     void analyzer_mode();
     void scheduler_mode();
     void tracer_mode();
+		void preview_topics_depend();
 
 private:
     Ui::MainWindow *ui;
@@ -50,6 +52,7 @@ private:
 
     QGroupBox *createMode();
     QGroupBox *createNodeListViewer();
+		QGroupBox *createPreviewer();
 		QGroupBox *createCreator();
     void createListWidget();
     ROSCH::Parser parser;

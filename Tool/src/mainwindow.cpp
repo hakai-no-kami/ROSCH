@@ -21,12 +21,14 @@ MainWindow::MainWindow(QWidget *parent) :
 
     Mode = createMode();
     NodeListViewer = createNodeListViewer();
+		Previewer = createPreviewer();
 		Creator = createCreator();
 
     /* top window */
     QVBoxLayout *topLayout = new QVBoxLayout;
     topLayout->addWidget(Mode);
 		topLayout->addWidget(NodeListViewer);
+		topLayout->addWidget(Previewer);
 		topLayout->addWidget(Creator);
     QWidget *window = new QWidget();
     window->setLayout(topLayout);
@@ -98,8 +100,22 @@ QGroupBox *MainWindow::createNodeListViewer(){
     return groupBox;
 }
 
+QGroupBox *MainWindow::createPreviewer(){
+    QGroupBox *groupBox = new QGroupBox("3. Preview Topics Dependancies");
+    QVBoxLayout *toplayout = new QVBoxLayout;
+
+		QPushButton *previewer = new QPushButton("Preview");
+		toplayout->addWidget(previewer);
+    groupBox->setLayout(toplayout);
+    
+		QObject::connect(previewer, SIGNAL(clicked()),
+				this, SLOT(preview_topics_depend()));
+
+    return groupBox;
+}
+
 QGroupBox *MainWindow::createCreator(){
-    QGroupBox *groupBox = new QGroupBox("3. Create YAML File");
+    QGroupBox *groupBox = new QGroupBox("4. Create YAML File");
     QVBoxLayout *toplayout = new QVBoxLayout;
 
 		QPushButton *okButton = new QPushButton("Create yaml");
@@ -179,6 +195,10 @@ void MainWindow::refresch_node_list(){
 
     QObject::connect(widget, SIGNAL(itemChanged(QListWidgetItem*)),
                      this, SLOT(highlightChecked(QListWidgetItem*)));
+}
+
+void MainWindow::preview_topics_depend(){
+	parser.preview_topics_depend(node_info);
 }
 
 void MainWindow::create_file(){

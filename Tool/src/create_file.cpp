@@ -318,60 +318,90 @@ DependInfo Parser::get_depend_info(std::string topic){
 void Parser::create_file(std::vector<node_info_t> infos, int mode){
 
 	file_clear(mode);
+	std::sort(infos.begin(),infos.end());
 
-  for(int i(0); i < (int)infos.size(); i++){
-		if(i%2 == 0 && i!=1){          
-			switch(mode){
-				case 1:
-					/* for measurer */
-					create_yaml_file(
-							infos[i].name,
-							infos[i].index,
-							infos[i].core,
-							infos[i].depend.pub_topic,
-							infos[i].depend.sub_topic);
-					std::cout << "[Measurer] Add: "<< infos[i].name.c_str() << std::endl;
-					break;
+  for(int i(0); i < (int)infos.size(); i+=2){
+		switch(mode){
+			case 1:
+				/* for measurer */
+				create_yaml_file(
+						infos[i].name,
+						infos[i].index,
+						infos[i].core,
+						infos[i].depend.pub_topic,
+						infos[i].depend.sub_topic);
+				std::cout << "[Measurer] Add: "<< infos[i].name.c_str() << std::endl;
+				break;
 				
-				case 2:
-					/* for Analyzer */
-					create_yaml_file(
-							infos[i].name,
-							infos[i].index,
-							infos[i].core,
-							infos[i].depend.pub_topic,
-							infos[i].depend.sub_topic,
-							infos[i].deadline,
-							0, /* period */
-							0 /* run_time */
-							);
-					std::cout << "[Analyzer] Add: " << infos[i].name.c_str() << std::endl;
-					break;
-				case 3:
-					/* for scheduler*/
-					create_yaml_file(
-							infos[i].name,
-							infos[i].core,
-							infos[i].depend.pub_topic,
-							infos[i].depend.sub_topic,
-							infos[i].sched_info);
-					std::cout << "[Scheduler] Add: " << infos[i].name.c_str() << std::endl;
-					break;
-				case 4:
-					/* for tracer */
-					create_yaml_file(
-							infos[i].name,
-							infos[i].depend.pub_topic,
-							infos[i].depend.sub_topic,
-							infos[i].deadline);
-					std::cout << "[Tracer] Add: " << infos[i].name.c_str() << std::endl;
-					break;
-				default:
-					std::cout << "Please check mode" << std::endl;
-					break;
+			case 2:
+				/* for Analyzer */
+				create_yaml_file(
+						infos[i].name,
+						infos[i].index,
+						infos[i].core,
+						infos[i].depend.pub_topic,
+						infos[i].depend.sub_topic,
+						infos[i].deadline,
+						0, /* period */
+						0 /* run_time */
+						);
+				std::cout << "[Analyzer] Add: " << infos[i].name.c_str() << std::endl;
+				break;
+			case 3:
+				/* for scheduler*/
+				create_yaml_file(
+						infos[i].name,
+						infos[i].core,
+						infos[i].depend.pub_topic,
+						infos[i].depend.sub_topic,
+						infos[i].sched_info);
+				std::cout << "[Scheduler] Add: " << infos[i].name.c_str() << std::endl;
+				break;
+			case 4:
+				/* for tracer */
+				create_yaml_file(
+						infos[i].name,
+						infos[i].depend.pub_topic,
+						infos[i].depend.sub_topic,
+						infos[i].deadline);
+				std::cout << "[Tracer] Add: " << infos[i].name.c_str() << std::endl;
+				break;
+			default:
+				std::cout << "Please check mode" << std::endl;
+				break;
+		}
+	}
+}
+
+void Parser::preview_topics_depend(std::vector<node_info_t> infos){
+	
+	std::ofstream outputfile("Graph.dot");
+	outputfile << "digraph " << "Topics{" << "\n";
+
+	std::sort(infos.begin(),infos.end());
+
+	/* create nodes */
+	for (int i(0); i < (int)infos.size(); i+=2)
+			outputfile << infos[i].index << "[label=\"" << infos[i].name << "\"];" << "\n";
+
+	/* create edges */
+	for (int i(0); i < (int)infos.size(); i+=2){
+		for(int j(0); j < (int)infos.size(); j+=2){
+			for(int k(0); k < (int)infos[i].depend.sub_topic.size(); k++){
+				for(int l(0); l < (int)infos[j].depend.pub_topic.size(); l++){
+					if(infos[i].depend.sub_topic[k] == infos[j].depend.pub_topic[l]){
+						outputfile << infos[j].index << "->" << infos[i].index << " ;" << "\n";
+					}				
+				}
 			}
 		}
 	}
+
+	outputfile << "}";
+	outputfile.close();
+
+	system("dot -Tpng Graph.dot -o Graph.png");
+	system("eog Graph.png &");
 }
 
 std::string Parser::get_topic(char *line){

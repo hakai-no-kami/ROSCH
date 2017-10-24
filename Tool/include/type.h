@@ -23,6 +23,11 @@ typedef struct node_info_t{
     int deadline;
     DependInfo depend;
     std::vector<SchedInfo> sched_info;
+
+		bool operator<(const node_info_t &right)const{
+			return index < right.index;//小さいのから大きい順番に並べたいとき
+		}
+
 } node_info_t;
 
 

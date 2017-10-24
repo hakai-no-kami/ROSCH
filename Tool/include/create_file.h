@@ -10,6 +10,7 @@ public:
     Parser();
     ~Parser();
     void create_file(std::vector<node_info_t> infos,int mode);
+		void preview_topics_depend(std::vector<node_info_t> infos);
     DependInfo get_depend_info(std::string topic);
     std::vector<std::string> get_node_list();
 
@@ -55,7 +56,6 @@ private:
     std::vector<std::string> split(std::string str, std::string delim);
 		bool checkFileExistence(const std::string &str);
 		void file_clear(int mode);
-
 };
 }
 #endif // CREATE_FILE_H
