@@ -13,13 +13,16 @@ The supported functions include:
 
 ## How to install and use ROSCH
 
- 1. Do you want to use __Measurer__ ? 
+ 1. You can create configurations file for following functions, automatically. 
+     - See [docs/README.tool.md](/docs/README.tool.md)
+
+ 2. Do you want to use __Measurer__ ? 
      - See [docs/README.measurer.md](/docs/README.measurer.md)
- 2. Do you want to use __Analyzer__ ?
+ 3. Do you want to use __Analyzer__ ?
      - See [docs/README.analyzer.md](/docs/README.analyzer.md)
- 3. Do you want to use __Scheduler__ ?  
+ 4. Do you want to use __Scheduler__ ?  
      - See [docs/README.scheduler.md](/docs/README.scheduler.md)
- 4. Do you want to use __Tracer__ ?  
+ 5. Do you want to use __Tracer__ ?  
      - See [docs/README.tracer.md](/docs/README.tracer.md)
 
 
