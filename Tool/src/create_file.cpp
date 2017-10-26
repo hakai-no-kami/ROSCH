@@ -19,7 +19,7 @@ void Parser::create_yaml_file(std::string name,
         std::vector<std::string> pub_topic,
         std::vector<std::string> sub_topic){
 
-	std::string file_name = "../../YAMLs/measure_rosch.yaml";
+	std::string file_name = "../../YAMLs/measurer_rosch.yaml";
   YAML::Emitter out;
   out << YAML::BeginSeq;
   out << YAML::BeginMap;
@@ -441,7 +441,7 @@ void Parser::file_clear(int mode){
 
 	switch(mode){
 		case 1:
-			file_name = "../../YAMLs/measure_rosch.yaml";
+			file_name = "../../YAMLs/measurer_rosch.yaml";
 			break;
 		case 2:
 			file_name = "../../YAMLs/analyzer_rosch.yaml";
