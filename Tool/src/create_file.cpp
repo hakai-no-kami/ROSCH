@@ -160,7 +160,7 @@ void Parser::create_yaml_file(std::string name,
       out << YAML::EndSeq;
   }
 
-  out << YAML::Key << "shed_info";
+  out << YAML::Key << "sched_info";
   for(int i(0); i < (int)sched_infos.size(); i++){ 	
     out << YAML::BeginSeq << YAML::BeginMap;
     out << YAML::Key << "core" << YAML::Value << sched_infos.at(i).core;
