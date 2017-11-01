@@ -27,7 +27,7 @@
 #include "sched_ros.h"
 #include "sched.h"
 #include "test.h"
-
+#include <resch-config.h>
 /**
  * RESCH task descriptor.
  */
@@ -102,8 +102,14 @@ static void disable_load_balance(resch_task_t *rt)
 	/* save the CPU mask. */
 	cpumask_copy(&rt->cpumask, &rt->task->cpus_allowed);
 	/* temporarily disable migration. */
-	cpus_clear(mask); 
+#ifdef USE_XENIAL
+	cpumask_clear(&rt->cpumask);
+	cpumask_set_cpu(smp_processor_id(), &mask);
+#else
+	cpus_clear(mask);
 	cpu_set(smp_processor_id(), mask); 
+#endif
+
 	cpumask_copy(&rt->task->cpus_allowed, &mask);
 	local_irq_enable();
 }
@@ -990,9 +996,17 @@ static void resch_task_init(resch_task_t *rt, int rid)
 	rt->rid = rid;
 	rt->task = current;
 	/* limit available CPUs by NR_RT_CPUS. */
-	cpus_clear(rt->cpumask); 
+#ifdef USE_XENIAL
+	cpumask_clear(&rt->cpumask);
+#else
+	cpus_clear(rt->cpumask);
+#endif
 	for (cpu = 0; cpu < NR_RT_CPUS; cpu++) {
+#ifdef USE_XENIAL
+		cpumask_set_cpu(cpu,&rt->cpumask);
+#else
 		cpu_set(cpu, rt->cpumask); 
+#endif
 	}
 	cpumask_and(&rt->task->cpus_allowed,
 				&rt->task->cpus_allowed, &rt->cpumask);
