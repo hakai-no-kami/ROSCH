@@ -1,6 +1,7 @@
 #!/bin/sh
 
 cp ../YAMLs/scheduler_rosch.yaml /tmp/
+./configure
 cd ./RESCH
 sudo make uninstall
 make

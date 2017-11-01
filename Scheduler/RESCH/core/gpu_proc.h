@@ -23,7 +23,9 @@ static struct semaphore proc_sem;
 
 #include <linux/module.h>
 #include <linux/seq_file.h>
-#ifdef USE_XENIAL
+#if defined(USE_XENIAL) || defined(USE_VIVID_OR_OLDER)
+#include <asm/uaccess.h>
+#else
 #include <linux/uaccess.h>
 #endif
 

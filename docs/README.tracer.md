@@ -16,7 +16,7 @@ After that, please run following commands.
 
 ```sh
 $ cd bin
-$ ./Tracer
+$ ./Tracer (a GUI application is launched)
 ``` 
 
 Required ROS node information:
@@ -24,8 +24,4 @@ Required ROS node information:
  * `nodename`: the name of ROS node (process)
  * __sub_topic__ : topic for subscribe
  * __pub_topic__ : topic for publish
- * `deadline`: period  (Not compulsory)
-
-## 3. If core dump occurs
-
-Please comment out or uncomment `#DEFINE CORE_DUMP` in tracer.h.
+ * `deadline`: period  (Optional)

@@ -11,8 +11,8 @@ $ ./install.sh
 
 ## 2. How to use
 
-$(TOPDIR)/scheduler_rosch.yaml is listed ROS node informations. Please, change scheduler_rosch.yaml.
-After that, please run nodes that you wrote in scheduler_rosch.yaml.
+$(TOPDIR)/YAMLs/scheduler_rosch.yaml is listed ROS node informations. Please, change scheduler_rosch.yaml.
+After that, please run ROS nodes that you wrote in scheduler_rosch.yaml.
 
 Required ROS node information:
   
@@ -21,7 +21,6 @@ Required ROS node information:
  * __sub_topic__ : topic for subscribe
  * __pub_topic__ : topic for publish
  * __run_time__ : the execution time
- * __deadline__ : if not the end node, this value is 0
  * __sched_info__ : scheduling parameters (i.g., `core`, `priority`, `start_time`, `run_time`). Note that `core` at sched_info indicates tha place to assign ROS node.
 
 

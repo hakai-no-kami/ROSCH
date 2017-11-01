@@ -1,9 +1,8 @@
 # Using Tool
 
-All functions in ROSCH need configuration file wrote by YAML.
-__Tool__ creates stationery files described informations required for each function, automatically.
-Then, `$(TOPDIR)` represents your top working directory.
-
+All functions in ROSCH need a configuration file wrote by YAML.
+__Tool__ creates stationery files in any format, automatically.
+$(TOPDIR) represents your top working directory.
 ## 1. How to Install
 
 ```sh
@@ -20,5 +19,5 @@ $ ./Tool (a GUI application is launched)
 
 After that follow the instractions in the GUI application.
 
-Note that created files is a "stationery" file.
+__Note__: Created files is a "stationery" file.
 Please change some value initialized 0.

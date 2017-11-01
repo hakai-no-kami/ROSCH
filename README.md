@@ -6,17 +6,17 @@ The supported functions include:
 - __Analyzer__  : Analyze ROS nodes (Offline).
 - __Scheduler__ : Schedule ROS nodes with Fixed-Priority policy. 
 - __Tracer__    : Visualize ROS nodes.  
-- __Tool__      : Support generating YAML files.  
+- __Tool__      : Generate YAML files for using above functions.
 
 ## Requirements
-- ROS indigo(Ubuntu 14.04)
+- ROS indigo (Ubuntu 14.04) or ROS kinetic (Ubuntu 16.04)
+- CUDA (Optional)
 
 ## How to install and use ROSCH
 
- 1. You can create configuration files for following functions, automatically. 
+ 1. [Recommend] You can create configuration files for using following functions, automatically.
      - See [docs/README.tool.md](/docs/README.tool.md)
-
- 2. Do you want to use __Measurer__ ? 
+ 2. Do you want to use __Measurer__ ?
      - See [docs/README.measurer.md](/docs/README.measurer.md)
  3. Do you want to use __Analyzer__ ?
      - See [docs/README.analyzer.md](/docs/README.analyzer.md)
