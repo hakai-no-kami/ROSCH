@@ -94,12 +94,12 @@ void hrtimer_sleep_interval(resch_task_t *, unsigned long);
 /* migrate the given task in Linux. */
 static inline void __migrate_task(resch_task_t *rt, int cpu)
 {
-#ifdef USE_XENIAL
-	cpumask_clear(&rt->cpumask);
-	cpumask_set_cpu(cpu,&rt->cpumask);
-#else
-  cpus_clear(rt->cpumask); 
+#ifdef USE_VIVID_OR_OLDER
+	cpus_clear(rt->cpumask);
 	cpu_set(cpu, rt->cpumask);
+#else
+cpumask_clear(&rt->cpumask);
+cpumask_set_cpu(cpu,&rt->cpumask); 
 #endif
 	set_cpus_allowed_ptr(rt->task, &rt->cpumask);
 }

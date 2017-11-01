@@ -102,12 +102,12 @@ static void disable_load_balance(resch_task_t *rt)
 	/* save the CPU mask. */
 	cpumask_copy(&rt->cpumask, &rt->task->cpus_allowed);
 	/* temporarily disable migration. */
-#ifdef USE_XENIAL
+#ifdef USE_VIVID_OR_OLDER
+  cpus_clear(mask);
+	cpu_set(smp_processor_id(), mask); 
+#else
 	cpumask_clear(&rt->cpumask);
 	cpumask_set_cpu(smp_processor_id(), &mask);
-#else
-	cpus_clear(mask);
-	cpu_set(smp_processor_id(), mask); 
 #endif
 
 	cpumask_copy(&rt->task->cpus_allowed, &mask);
@@ -996,16 +996,16 @@ static void resch_task_init(resch_task_t *rt, int rid)
 	rt->rid = rid;
 	rt->task = current;
 	/* limit available CPUs by NR_RT_CPUS. */
-#ifdef USE_XENIAL
-	cpumask_clear(&rt->cpumask);
-#else
+#ifdef USE_VIVID_OR_OLDER
 	cpus_clear(rt->cpumask);
+#else
+	cpumask_clear(&rt->cpumask);
 #endif
 	for (cpu = 0; cpu < NR_RT_CPUS; cpu++) {
-#ifdef USE_XENIAL
-		cpumask_set_cpu(cpu,&rt->cpumask);
-#else
+#ifdef USE_VIVID_OR_OLDER
 		cpu_set(cpu, rt->cpumask); 
+#else
+		cpumask_set_cpu(cpu,&rt->cpumask);
 #endif
 	}
 	cpumask_and(&rt->task->cpus_allowed,

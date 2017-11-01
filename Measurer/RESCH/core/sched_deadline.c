@@ -64,10 +64,10 @@ int sched_wait_interval(int flags, const struct timespec __user * rqtp, struct t
 	    ktime_t rmt;
 	    struct timespec rmt_ts;
 	    rmt = hrtimer_expires_remaining(&t.timer);
-#ifdef USE_XENIAL
-			if (rmt > 0)
+#ifdef USE_ZESTY_OR_NEWER
+			if (rmt > 0) /* may be needed to fix for Ubuntu 16.04 */
 #else
-	    if (rmt.tv64 > 0) /* must fix for ubuntu 16.04 */
+	    if (rmt.tv64 > 0) 
 #endif
 				goto out;
 	    rmt_ts = ktime_to_timespec(rmt);
