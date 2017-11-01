@@ -16,7 +16,7 @@ CXXFLAGS      = -std=c++11 -m64 -pipe -O2 -Wall -W -D_REENTRANT $(DEFINES)
 INCPATH       = -I/usr/share/qt4/mkspecs/linux-g++-64 -I. -I/usr/include/qt4/QtCore -I/usr/include/qt4/QtGui -I/usr/include/qt4 -I. -I./include -I.
 LINK          = g++
 LFLAGS        = -m64 -Wl,-O1
-LIBS          = $(SUBLIBS)  -std=c++11 -L/usr/lib/x86_64-linux-gnu -lQtGui -lQtCore -lpthread -lyaml-cpp `pkg-config --cflags opencv` `pkg-config --libs opencv` 
+LIBS          = $(SUBLIBS)  -std=c++11 -L/usr/lib/x86_64-linux-gnu -lQtGui -lQtCore -lpthread -lyaml-cpp #`pkg-config --cflags opencv` `pkg-config --libs opencv` 
 AR            = ar cqs
 RANLIB        = 
 QMAKE         = /usr/lib/x86_64-linux-gnu/qt4/bin/qmake
