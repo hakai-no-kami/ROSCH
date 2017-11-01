@@ -5,7 +5,7 @@ The supported functions include:
 - __Measurer__  : Measure the execution time for ROS nodes
 - __Analyzer__  : Analyze ROS nodes (Offline).
 - __Scheduler__ : Schedule ROS nodes with Fixed-Priority policy. 
-- __Tracer__    : Visualize ROS nodes.  
+- __Tracer__    : Visualize a scheduling result for ROS nodes.  
 - __Tool__      : Generate YAML files for using above functions.
 
 ## Requirements
