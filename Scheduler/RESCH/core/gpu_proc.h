@@ -23,6 +23,9 @@ static struct semaphore proc_sem;
 
 #include <linux/module.h>
 #include <linux/seq_file.h>
+#ifdef USE_XENIAL
+#include <linux/uaccess.h>
+#endif
 
 static int gdev_proc_val_show(struct seq_file *seq, void *offset)
 {

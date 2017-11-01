@@ -6,8 +6,12 @@
  * User applications access the RESCH core through ioctl() & write().
  */
 
-#include <asm/current.h>
+#ifdef USE_XENIAL
+#include <linux/uaccess.h>
+#else
 #include <asm/uaccess.h>
+#endif
+#include <asm/current.h>
 #include <linux/cdev.h>
 #include <linux/fs.h>
 #include <linux/module.h>
