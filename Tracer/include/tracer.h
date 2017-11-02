@@ -2,56 +2,62 @@
 #define TRACER_H
 
 #include <stdlib.h>
-#include <string>
-#include "config.h"
-#include <vector>
-#include "yaml-cpp/yaml.h"
 #include <iostream>
 #include <sstream>
+#include <string>
+#include <vector>
+#include "config.h"
+#include "yaml-cpp/yaml.h"
 
-typedef struct node_info_t {
+typedef struct node_info_t
+{
   std::string name;
   unsigned int pid;
-	double deadline;
+  double deadline;
   std::vector<std::string> v_subtopic;
   std::vector<std::string> v_pubtopic;
 } node_info_t;
 
-typedef struct trace_info_t {
-    std::string name; 
-    std::vector<std::string> v_subtopic;
-    std::vector<std::string> v_pubtopic;
-		unsigned int pid;
-    int core;
-    double runtime;
-    double start_time;
-		int prio;
-		double deadline;
+typedef struct trace_info_t
+{
+  std::string name;
+  std::vector<std::string> v_subtopic;
+  std::vector<std::string> v_pubtopic;
+  unsigned int pid;
+  int core;
+  double runtime;
+  double start_time;
+  int prio;
+  double deadline;
 
-    bool operator<(const trace_info_t& another) const{
-        return start_time < another.start_time;
-    }
+  bool operator<(const trace_info_t& another) const
+  {
+    return start_time < another.start_time;
+  }
 } trace_info_t;
 
-namespace SchedViz{
-class Tracer{
+namespace SchedViz
+{
+class Tracer
+{
 public:
-    Tracer();
-    ~Tracer();
-    void setup(std::string);
-    void reset(std::string);
-    void start_ftrace(std::string);
+  Tracer();
+  ~Tracer();
+  void setup(std::string);
+  void reset(std::string);
+  void start_ftrace(std::string);
 
-    std::vector<trace_info_t> get_info();
-		std::vector<node_info_t> get_node_list();
-    std::vector<node_info_t> v_node_info_;
-    std::vector<trace_info_t> v_trace_info;
+  std::vector<trace_info_t> get_info();
+  std::vector<node_info_t> get_node_list();
+  std::vector<node_info_t> v_node_info_;
+  std::vector<trace_info_t> v_trace_info;
+
 private:
-  void load_config_(const std::string &filename);
+  void load_config_(const std::string& filename);
   Config config_;
 
   unsigned int get_pid(std::string name);
-  void mount(bool,std::string);
+  void mount(bool, std::string);
   void set_tracing_on(int mode, std::string);
   void set_trace(int mode, std::string);
   void set_events_enable(int mode, std::string);
@@ -60,13 +66,11 @@ private:
   void output_log(std::string);
   void filter_pid(bool mode, std::string);
   void extract_period();
-  void create_process_info(
-			std::vector<std::string> find_prev_pids,
-			std::vector<std::string> find_next_pids);
+  void create_process_info(std::vector<std::string> find_prev_pids, std::vector<std::string> find_next_pids);
   std::vector<std::string> split(std::string str, std::string delim);
   std::string trim(const std::string& string);
-	int ctoi(std::string s);
+  int ctoi(std::string s);
 };
 }
 
-#endif // TRACER_H
+#endif  // TRACER_H
