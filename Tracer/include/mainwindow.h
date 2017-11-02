@@ -14,7 +14,7 @@
 #include "mysquare.h"
 #include "tracer.h"
 
-#define ANALYZE_DEADLINE_MISS
+//#define ANALYZE_DEADLINE_MISS
 
 class QMenu;
 class SecondDialog;

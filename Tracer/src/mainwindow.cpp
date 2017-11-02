@@ -406,8 +406,8 @@ void MainWindow::viz_process(std::vector<trace_info_t> info, double zoom)
           scene->addItem(deadline_miss_list[k]);
           k++;
         }
-        break;
 #endif
+        break;
 
       default:
         y = base_y;
