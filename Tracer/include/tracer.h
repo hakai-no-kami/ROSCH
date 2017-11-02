@@ -70,6 +70,7 @@ private:
   std::vector<std::string> split(std::string str, std::string delim);
   std::string trim(const std::string& string);
   int ctoi(std::string s);
+  unsigned int get_topic(char* line);
 };
 }
 

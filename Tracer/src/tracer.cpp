@@ -65,30 +65,29 @@ void Tracer::load_config_(const std::string &filename)
   }
 }
 
-unsigned int Tracer::get_pid(std::string name)
+unsigned int Tracer::get_pid(std::string topic)
 {
-  FILE *pid_fp;
+  std::string cmd = "rosnode info ";
   unsigned int pid = 0;
+  FILE *pid_fp;
   char buf[1024];
-  std::string ps = "ps --no-heading -C ";
-  std::string args = " -o pid";
-  ps += (name + args);
+  char Pid[] = "Pid";
+  char *sp1;
 
-  if ((pid_fp = popen(ps.c_str(), "r")) == NULL)
+  cmd += topic;
+
+  if ((pid_fp = popen(cmd.c_str(), "r")) == NULL)
     exit(1);
 
   while (fgets(buf, sizeof(buf), pid_fp) != NULL)
-    pid = atoi(buf);
+  {
+    buf[strlen(buf) - 1] = '\0';
+    /* detect PID */
+    if (sp1 = strstr(buf, Pid))
+      pid = get_topic(sp1);
+  }
 
   pclose(pid_fp);
-
-  /* Specified PID is not detected */
-  if (pid == 0)
-  {
-    std::cout << "Specified node's PID is not detected" << std::endl;
-    std::cout << "Please check node name in trace_rosch.yaml" << std::endl;
-    exit(1);
-  }
 
   return pid;
 }
@@ -577,4 +576,11 @@ std::vector<trace_info_t> Tracer::get_info()
 std::vector<node_info_t> Tracer::get_node_list()
 {
   return v_node_info_;
+}
+
+unsigned int Tracer::get_topic(char *line)
+{
+  std::vector<std::string> res;
+  res = split(line, " ");
+  return std::stoi(res.at(1));
 }
