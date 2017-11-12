@@ -8,7 +8,7 @@ cmake ..
 make
 
 # For Ubuntu 14.04 
-if [ ! -e /opt/ros/indigo/lib/libroscpp.so ]; then
+if [ -e /opt/ros/indigo/lib/libroscpp.so ]; then
 	if [ ! -e /opt/ros/indigo/lib/libroscpp.so.backup ]; then
 		echo "-------- Create backup file --------"
     echo "sudo cp /opt/ros/indigo/lib/libroscpp.so /opt/ros/indigo/lib/libroscpp.so.backup"
