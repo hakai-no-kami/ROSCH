@@ -18,12 +18,12 @@ public:
 
 private:
   /* for Measurer */
-  void create_yaml_file(std::string name, int index,
+  void create_yaml_file(std::string name,
                         int core,  //
                         std::vector<std::string> pub_topic, std::vector<std::string> sub_topic);
 
   /* for Analyzer */
-  void create_yaml_file(std::string name, int index, int core, std::vector<std::string> pub_topic,
+  void create_yaml_file(std::string name, int core, std::vector<std::string> pub_topic,
                         std::vector<std::string> sub_topic, int deadline, int period, int run_time);
 
   /* for Scheduler */

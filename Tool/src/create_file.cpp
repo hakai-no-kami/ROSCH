@@ -17,7 +17,7 @@ Parser::~Parser()
 }
 
 /* for Measurer */
-void Parser::create_yaml_file(std::string name, int index, int core, std::vector<std::string> pub_topic,
+void Parser::create_yaml_file(std::string name, int core, std::vector<std::string> pub_topic,
                               std::vector<std::string> sub_topic)
 {
   std::string file_name = "../../YAMLs/measurer_rosch.yaml";
@@ -26,8 +26,6 @@ void Parser::create_yaml_file(std::string name, int index, int core, std::vector
   out << YAML::BeginMap;
   out << YAML::Key << "nodename";
   out << YAML::Value << name;
-  out << YAML::Key << "nodeindex";
-  out << YAML::Value << index;
   out << YAML::Key << "core";
   out << YAML::Value << core;
 
@@ -70,7 +68,7 @@ void Parser::create_yaml_file(std::string name, int index, int core, std::vector
 }
 
 /* for Analyzer */
-void Parser::create_yaml_file(std::string name, int index, int core, std::vector<std::string> pub_topic,
+void Parser::create_yaml_file(std::string name, int core, std::vector<std::string> pub_topic,
                               std::vector<std::string> sub_topic, int deadline, int period, int run_time)
 {
   std::string file_name = "../../YAMLs/analyzer_rosch.yaml";
@@ -79,8 +77,6 @@ void Parser::create_yaml_file(std::string name, int index, int core, std::vector
   out << YAML::BeginMap;
   out << YAML::Key << "nodename";
   out << YAML::Value << name;
-  out << YAML::Key << "nodeindex";
-  out << YAML::Value << index;
   out << YAML::Key << "core";
   out << YAML::Value << core;
 
@@ -356,14 +352,14 @@ void Parser::create_file(std::vector<node_info_t> infos, int mode)
     {
       case 1:
         /* for measurer */
-        create_yaml_file(infos[i].name, infos[i].index, infos[i].core, infos[i].depend.pub_topic,
+        create_yaml_file(infos[i].name, infos[i].core, infos[i].depend.pub_topic,
                          infos[i].depend.sub_topic);
         std::cout << "[Measurer] Add: " << infos[i].name.c_str() << std::endl;
         break;
 
       case 2:
         /* for Analyzer */
-        create_yaml_file(infos[i].name, infos[i].index, infos[i].core, infos[i].depend.pub_topic,
+        create_yaml_file(infos[i].name, infos[i].core, infos[i].depend.pub_topic,
                          infos[i].depend.sub_topic, infos[i].deadline, 0, /* period */
                          0                                                /* run_time */
                          );

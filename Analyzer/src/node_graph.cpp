@@ -35,7 +35,6 @@ void NodeGraph::load_config_(const std::string &filename)
     for (unsigned int i(0); i < node_list.size(); i++)
     {
       const YAML::Node subnode_name = node_list[i]["nodename"];
-      const YAML::Node subnode_index = node_list[i]["nodeindex"];
       const YAML::Node subnode_core = node_list[i]["core"];
       const YAML::Node subnode_subtopic = node_list[i]["sub_topic"];
       const YAML::Node subnode_pubtopic = node_list[i]["pub_topic"];
