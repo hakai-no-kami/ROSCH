@@ -140,7 +140,9 @@ bool Analyzer::is_in_range()
 
 int Analyzer::get_target_index()
 {
-    return graph_analyzer_->get_target_node()->index;
+	/* Requires consideration 
+	 * ->index or ->target */
+    return graph_analyzer_->get_target_node()->target;
 }
 
 void Analyzer::update_graph()
