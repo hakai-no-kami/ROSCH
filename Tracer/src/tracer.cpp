@@ -475,8 +475,16 @@ void Tracer::create_process_info(std::vector<std::string> find_prev_pid, std::ve
       if (buf.find(find_prev_pid.at(i)) != std::string::npos)
       {
         finish_time_s = split(trim(buf), delim);
-        finish_time_i = strtod(finish_time_s[3].c_str(), NULL);  // index of array is 2 or 3
-        if (finish_time_i - start_time_i > 0)
+        if (strtod(finish_time_s[3].c_str(), NULL) != 0)
+        {
+          finish_time_i = strtod(finish_time_s[3].c_str(), NULL);
+        }
+        else
+        {
+          finish_time_i = strtod(finish_time_s[2].c_str(), NULL);  // index of array is 2 or 3
+        }
+
+				if (finish_time_i - start_time_i > 0)
           trace_info.runtime = finish_time_i - start_time_i;
         else
           trace_info.runtime = 0;
