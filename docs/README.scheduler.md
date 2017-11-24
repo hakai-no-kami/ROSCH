@@ -7,7 +7,7 @@ Follow the instruction below to schedule for ROS node with Fixed-Priority.
 
  Please list ROS node informations you schedule in `$(TOPDIR)/YAMLs/scheduler_rosch.yaml`.
  Then, please change __core__, __run_time__, and __sched_info__ as necessary.
-After that, launch ROS nodes listed in __scheduler_rosch.yaml__.
+After that, launch ROS nodes listed in scheduler_rosch.yaml.
 
 Required ROS node information:
   

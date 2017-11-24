@@ -5,8 +5,8 @@ Follow the instruction below to measure the execution time for ROS node. `$(TOPD
 ## 1. How to use
 
 Please list ROS node informations you measure in `$(TOPDIR)/YAMLs/measurer_rosch.yaml`. 
-Then, please change `core` as necessary.
-After that, launch ROS nodes listed in __measurer_rosch.yaml__. 
+Then, please change __core__ as necessary.
+After that, launch ROS nodes listed in measurer_rosch.yaml. 
 Results is in `~/.ros/rosch/***`.
 
 Required ROS node information:
