@@ -14,7 +14,7 @@ The supported functions include:
 
 ## How to install and use ROSCH
 
- 1. [Recommend] You can create configuration files for using following functions, automatically.
+ 1. [__Recommend__] You can create configuration files for using following functions, automatically.
      - See [docs/README.tool.md](/docs/README.tool.md)
  2. Do you want to use __Measurer__ ?
      - See [docs/README.measurer.md](/docs/README.measurer.md)

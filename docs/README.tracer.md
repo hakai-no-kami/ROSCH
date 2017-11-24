@@ -11,7 +11,7 @@ $ make
 
 ## 2. How to use
 
-Please list the nodes you want to trace on the $(TOPDIR)/trace_rosch.yaml.
+Please list the nodes you trace on the `$(TOPDIR)/trace_rosch.yaml`.
 After that, please run following commands.
 
 ```sh

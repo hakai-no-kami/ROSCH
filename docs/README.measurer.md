@@ -2,26 +2,26 @@
 
 Follow the instruction below to measure the execution time for ROS node. `$(TOPDIR)` represents your top working directory.
 
-## 1. How to Install
+## 1. How to use
+
+Please list ROS node informations you measure in `$(TOPDIR)/YAMLs/measurer_rosch.yaml`. 
+Then, please change `core` as necessary.
+After that, launch ROS nodes listed in __measurer_rosch.yaml__. 
+Results is in `~/.ros/rosch/***`.
+
+Required ROS node information:
+
+ * `nodename`: the name of ROS node
+ * `core`: if this node uses n cores (e.g., OpenMP), core is n.
+ * `sub_topic`: topics for subscribe
+ * `pub_topic`: topics for publish
+
+## 2. How to Install
 
 ```sh
 $ cd $(TOPDIR)/Measurer
 $ ./install.sh
 ``` 
-
-## 2. How to use
-
-$(TOPDIR)/YAMLs/measurer_rosch.yaml is listed ROS node informations. Please change measurer_rosch.yaml.
-After that, please run ROS nodes that you wrote in measurer_rosch.yaml. Results is in ~/.ros/rosch/***
-
-Required ROS node information:
-
- * `nodename`: the name of ROS node
- * `nodeindex`: the index of ROS node
- * `core`: if this node uses n cores, core is n.
- * `sub_topic`: topic for subscribe
- * `pub_topic`: topic for publish
-
 
 ## Uninstall or Re-install
 
