@@ -22,6 +22,6 @@ $ ./Tracer (a GUI application is launched)
 Required ROS node information:
 
  * `nodename`: the name of ROS node (process)
- * __sub_topic__ : topic for subscribe
- * __pub_topic__ : topic for publish
+ * `sub_topic`: topic for subscribe
+ * `pub_topic`: topic for publish
  * `deadline`: period  (Optional)

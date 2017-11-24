@@ -10,13 +10,13 @@ Please, prepare __anazlyzer_rosch.yaml__ in `$(TOPDIR)/YAMLs/`.
 
 Required ROS node information:
 
- * __nodename__ : the name of ROS node
- * __core__ : if this node uses n cores (e.g., OpenMP), core is n.
- * __sub_topic__ : topics for subscribe
- * __pub_topic__ : topics for publish
- * __run_time__ : the execution time
- * __deadline__ : if an end node, set a deadline. Otherwise set to 0.
- * __period__ : if an entry node, set a period. Otherwise set to 0.
+ * `nodename` : the name of ROS node
+ * `core` : if this node uses n cores (e.g., OpenMP), core is n.
+ * `sub_topic` : topics for subscribe
+ * `pub_topic` : topics for publish
+ * `run_time` : the execution time
+ * `deadline` : if an end node, set a deadline. Otherwise set to 0.
+ * `period` : if an entry node, set a period. Otherwise set to 0.
 
 
 ## 2. How to make

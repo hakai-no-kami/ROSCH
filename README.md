@@ -29,5 +29,5 @@ The supported functions include:
 Once ROSCH is successfully installed, you can install GPU scheduler:
 
  1. Do you want to use __Linux_RTXG__ ?   
-  - See [Scheduler/ROSCH/README.md](/Scheduler/RESCH/README.md) 
+  - See [Scheduler/RESCH/README.md](/Scheduler/RESCH/README.md) 
 
