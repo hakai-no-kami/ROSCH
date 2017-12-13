@@ -6,6 +6,9 @@
 #include <sys/types.h>
 #include <unistd.h>
 
+#include <sys/resource.h>
+#include <sys/time.h>
+
 /* for rosch */
 #include <resch/api_ros_gpu.h>
 
@@ -190,8 +193,9 @@ int cuda_test_madd(unsigned int n)
       return -1;
     }
 
-    std::cout << "enqueue" << getpid() << std::endl;
     ros_gsched_enqueue();
+    std::cout << "[launch]:"
+              << " pid: " << getpid() << " prio: " << getpriority(PRIO_PROCESS, 0) << std::endl;
 
     /* launch the kernel */
     res = cuLaunchGrid(function, grid_x, grid_y);
@@ -200,10 +204,15 @@ int cuda_test_madd(unsigned int n)
       printf("cuLaunchGrid failed: res = %lu\n", (unsigned long)res);
       return -1;
     }
-    std::cout << "dequeue" << getpid() << std::endl;
-    ros_gsched_dequeue();
 
     cuCtxSynchronize();
+
+    ros_gsched_dequeue();
+
+    std::cout << "[finish]:"
+              << " pid: " << getpid() << " prio: " << getpriority(PRIO_PROCESS, 0) << "\n"
+              << std::endl;
+
     /* download c[] */
     res = cuMemcpyDtoH(c, c_dev, n * n * sizeof(unsigned int));
     if (res != CUDA_SUCCESS)
@@ -248,7 +257,7 @@ int cuda_test_madd(unsigned int n)
       return -1;
     }
   }
-  ros_gsched_exit();
+  ros_gsched_exit(false);
 
   res = cuCtxDestroy(ctx);
   if (res != CUDA_SUCCESS)
