@@ -24,7 +24,7 @@ private:
 
   /* for Analyzer */
   void create_yaml_file(std::string name, int core, std::vector<std::string> pub_topic,
-                        std::vector<std::string> sub_topic, int deadline, int period, int run_time);
+                        std::vector<std::string> sub_topic, int deadline, int ignorable,int period, int run_time);
 
   /* for Scheduler */
   void create_yaml_file(std::string name, int core, std::vector<std::string> pub_topic,

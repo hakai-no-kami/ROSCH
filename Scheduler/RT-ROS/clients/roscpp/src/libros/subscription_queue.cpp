@@ -237,6 +237,13 @@ void SubscriptionQueue::waitAppThread() {
     task_attr_proc.setDefaultScheduling(sched_node_manager_.v_pid);
     ret = event_notification.update(-1);
     task_attr_proc.setCoreAffinity(sched_node_manager_.getUseCores());
+  // } else if (ret == 2){
+  //   std::cout << "==== Deadline miss but ignored! ====" << std::endl;
+  //   std::cout << "Remain Topics: "
+  //             << sched_node_manager_.publish_counter.getRemainPubTopicSize()
+  //             << "/" << sched_node_manager_.publish_counter.getPubTopicSize()
+  //             << std::endl;
+  //   std::cout << "========================" << std::endl;
   } else {
     std::cout << "==== Finished before the deadline ====" << std::endl;
     std::cout << "Remain Topics: "

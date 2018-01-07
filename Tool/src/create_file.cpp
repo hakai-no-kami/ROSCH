@@ -69,7 +69,7 @@ void Parser::create_yaml_file(std::string name, int core, std::vector<std::strin
 
 /* for Analyzer */
 void Parser::create_yaml_file(std::string name, int core, std::vector<std::string> pub_topic,
-                              std::vector<std::string> sub_topic, int deadline, int period, int run_time)
+                              std::vector<std::string> sub_topic, int deadline, int ignorable,int period, int run_time)
 {
   std::string file_name = "../../YAMLs/analyzer_rosch.yaml";
   YAML::Emitter out;
@@ -112,6 +112,8 @@ void Parser::create_yaml_file(std::string name, int core, std::vector<std::strin
 
   out << YAML::Key << "deadline";
   out << YAML::Value << deadline;
+  out << YAML::Key << "ignoarable";
+  out << YAML::Value << ignorable;
   out << YAML::Key << "period";
   out << YAML::Value << period;
   out << YAML::Key << "run_time";
@@ -360,7 +362,7 @@ void Parser::create_file(std::vector<node_info_t> infos, int mode)
       case 2:
         /* for Analyzer */
         create_yaml_file(infos[i].name, infos[i].core, infos[i].depend.pub_topic,
-                         infos[i].depend.sub_topic, infos[i].deadline, 0, /* period */
+                         infos[i].depend.sub_topic, infos[i].deadline, infos[i].ignorable,0, /* period */
                          0                                                /* run_time */
                          );
         std::cout << "[Analyzer] Add: " << infos[i].name.c_str() << std::endl;

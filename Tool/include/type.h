@@ -24,6 +24,7 @@ typedef struct node_info_t
   int core;
   int runtime;
   int deadline;
+  int ignorable;
   DependInfo depend;
   std::vector<SchedInfo> sched_info;
 

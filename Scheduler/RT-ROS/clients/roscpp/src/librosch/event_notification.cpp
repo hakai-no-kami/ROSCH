@@ -92,7 +92,7 @@ int EventNotification::update(int poll_timeout) {
   int ret;
   int events = POLLIN;
   struct pollfd poll_fd = {signal_pipe_[0], events, 0};
-
+// TODO:
   if ((ret = poll(&poll_fd, 1, poll_timeout)) < 0) {
     std::cerr << "poll failed with error " << std::endl;
     return -1;
