@@ -20,6 +20,7 @@ public:
   int get_node_run_time(const int node_index);
   int get_node_deadline(const int node_index);
   int get_node_period(const int node_index);
+  int get_node_ignorable(const int node_index);
   std::vector<std::string> get_node_subtopic_p(const int node_index, std::string u_bar, int period);
   std::vector<std::string> get_node_pubtopic_p(const int node_index, std::string u_bar, int period);
   size_t get_node_list_size();

@@ -31,6 +31,7 @@ struct Node_P
   int deadline_p;
   int period_p;
   int period_count;
+  int ignorable_p;
   std::vector<std::string> sub_topic_p;
   std::vector<std::string> pub_topic_p;
 
@@ -62,6 +63,7 @@ typedef struct node_t
 #ifdef SCHED_ANALYZER
   int run_time;
   int deadline;
+  int ignorable;
   int period;
   int inv_laxity;
 #endif
@@ -79,6 +81,7 @@ typedef struct node_info_t
   int run_time;
   int deadline;
   int period;
+  int ignorable;
 #endif
   std::vector<std::string> v_subtopic;
   std::vector<std::string> v_pubtopic;

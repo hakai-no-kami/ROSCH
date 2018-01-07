@@ -40,6 +40,7 @@ void NodeGraph::load_config_(const std::string &filename)
       const YAML::Node subnode_pubtopic = node_list[i]["pub_topic"];
       const YAML::Node subnode_deadline = node_list[i]["deadline"];
       const YAML::Node subnode_period = node_list[i]["period"];
+      const YAML::Node subnode_ignorable = node_list[i]["ignorable"];
 #ifdef SCHED_ANALYZER
       const YAML::Node subnode_runtime = node_list[i]["run_time"];
 #endif
@@ -48,6 +49,7 @@ void NodeGraph::load_config_(const std::string &filename)
       node_info.index = i;
       node_info.deadline = subnode_deadline.as<int>();
       node_info.period = subnode_period.as<int>();
+      node_info.ignorable = subnode_period.as<int>();
 #ifdef SCHED_ANALYZER
       node_info.run_time = subnode_runtime.as<int>();
 #endif
@@ -142,6 +144,15 @@ int NodeGraph::get_node_period(const int node_index)
   }
   exit(-1);
 }
+int NodeGraph::get_node_ignorable(const int node_index)
+{
+  for (int i(0); (size_t)i < v_node_info_.size(); ++i)
+  {
+    if (v_node_info_.at(i).index == node_index)
+      return v_node_info_.at(i).ignorable;
+  }
+  exit(-1);
+}
 
 std::vector<std::string> NodeGraph::get_node_pubtopic_p(const int node_index, std::string periodic_info, int period)
 {
@@ -179,6 +190,7 @@ SingletonNodeGraphAnalyzer::SingletonNodeGraphAnalyzer()
       g[desc[index]].deadline_p = get_node_deadline(original) * (i + 1);  // if not an end node, this value is 0
       g[desc[index]].period_p = i == 0 ? 0 : get_node_period(original) * i;
       g[desc[index]].period_count = i;
+      g[desc[index]].ignorable_p = get_node_ignorable(original);
       g[index].sub_topic_p = get_node_subtopic_p(original, u_bar, i);
       g[index].pub_topic_p = get_node_pubtopic_p(original, u_bar, i);
     }
