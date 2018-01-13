@@ -56,6 +56,8 @@ void NodesInfo::loadConfig(const std::string &filename) {
         sched_info_element.core = sched_info[idx]["core"].as<int>();
         sched_info_element.priority = sched_info[idx]["priority"].as<int>();
         sched_info_element.run_time = sched_info[idx]["run_time"].as<int>();
+        sched_info_element.ignorable = sched_info[idx]["ignorable"].as<int>();
+        sched_info_element.group = sched_info[idx]["group"].as<int>();
         // sched_info_element.start_time =
         // sched_info[idx]["start_time"].as<int>();
         // sched_info_element.end_time = sched_info_element.start_time +

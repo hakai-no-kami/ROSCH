@@ -253,7 +253,7 @@ void SubscriptionQueue::waitAppThread() {
     std::cout << "========================" << std::endl;
   }
 
-  int elapsed_time_ms = (int)((double)timer.elapsed().wall) / 1000000.0;
+  int elapsed_time_ms = abs((int)((double)timer.elapsed().wall) / 1000000.0);
   sched_node_manager_.subPollTime(elapsed_time_ms);
   std::cout << "Elapsed time: " << elapsed_time_ms << std::endl
             << "Remain poll time:" << sched_node_manager_.getPollTime()

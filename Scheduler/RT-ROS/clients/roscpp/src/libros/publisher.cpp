@@ -30,6 +30,7 @@
 #include "ros/node_handle.h"
 #include "ros/publication.h"
 #include "ros/topic_manager.h"
+#include <iostream>
 // ROSCHEDULER
 #include "ros_rosch/publish_counter.h"
 
@@ -72,10 +73,12 @@ void Publisher::publish(const boost::function<SerializedMessage(void)> &serfunc,
   // ROSCHEDULER
   rosch::SingletonSchedNodeManager &sched_node_manager(
       rosch::SingletonSchedNodeManager::getInstance());
+      std::cout << "hogehoge" << std::endl;
   if (sched_node_manager.isRunningFailSafeFunction()) {
     if (!sched_node_manager.publish_counter.isRemainPubTopic(impl_->topic_))
       return;
   } else {
+    std::cout << sched_node_manager.isDeadlineMiss() << std::endl;
     sched_node_manager.publish_counter.removeRemainPubTopic(impl_->topic_);
     if (sched_node_manager.isDeadlineMiss() &&
         !(sched_node_manager.publishEvenIfMissedDeadline())) {

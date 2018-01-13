@@ -62,6 +62,7 @@ public:
   void resetDeadlineMiss();
   std::vector<int> getUseCores();
   int getPriority();
+  void failSafeFunction();
   void runFailSafeFunction();
   bool isRunningFailSafeFunction();
   bool isRanFailSafeFunction();
