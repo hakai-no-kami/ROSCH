@@ -148,6 +148,8 @@ void MainWindow::highlightChecked(QListWidgetItem *item)
     sched.core = 0;     /* template value */
     sched.priority = 0; /* template value */
     sched.runtime = 0;  /* template value */
+    sched.ignorable = 1;
+    sched.group = 0;
     element.sched_info.push_back(sched);
 
     node_info.push_back(element);

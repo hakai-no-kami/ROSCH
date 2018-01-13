@@ -9,6 +9,8 @@ typedef struct SchedInfo
   int core;
   int priority;
   int runtime;
+  int ignorable;
+  int group;
 } SchedInfo;
 
 typedef struct DependInfo

@@ -47,11 +47,21 @@ void SingletonSchedNodeManager::setPublishEvenIfMissedDeadline(
     bool can_publish) {
   publish_even_if_missed_deadline_ = can_publish;
 }
-
+void SingletonSchedNodeManager::failSafeFunction() {
+    if (node_info_.v_subtopic.size() > 0){
+      if(node_info_.v_sched_info.at(0).ignorable == 1){
+        cout << "deadline miss but ignored" << endl;
+      }
+      else{
+        cout << "unignorable deadline miss" << endl;
+      }
+    }
+}
 void SingletonSchedNodeManager::runFailSafeFunction() {
   running_fail_safe_function_ = true;
-  if (func)
-    func();
+  // if (func)
+  //   func();
+  failSafeFunction();
   running_fail_safe_function_ = false;
   ran_fail_safe_function_ = true;
 }

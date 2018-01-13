@@ -177,6 +177,8 @@ void Parser::create_yaml_file(std::string name, int core, std::vector<std::strin
     out << YAML::Key << "core" << YAML::Value << sched_infos.at(i).core;
     out << YAML::Key << "priority" << YAML::Value << sched_infos.at(i).priority;
     out << YAML::Key << "run_time" << YAML::Value << sched_infos.at(i).runtime;
+    out << YAML::Key << "ignorable" << YAML::Value << sched_infos.at(i).ignoarable;
+    out << YAML::Key << "group" << YAML::Value << sched_infos.at(i).group;
     out << YAML::EndMap << YAML::EndSeq;
   }
   out << YAML::EndMap;

@@ -10,6 +10,8 @@ typedef struct SchedInfo {
   int run_time;
   int start_time;
   int end_time;
+  int ignorable;
+  int group;
 } SchedInfo;
 
 typedef struct NodeInfo {
