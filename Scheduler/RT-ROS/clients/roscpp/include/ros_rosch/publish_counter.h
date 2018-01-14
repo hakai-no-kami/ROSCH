@@ -1,6 +1,6 @@
 #ifndef PUBLISH_COUNTER_H
 #define PUBLISH_COUNTER_H
-
+#include "node_graph.hpp"
 #include "type.h"
 #include <iostream>
 #include <string>
@@ -62,6 +62,7 @@ public:
   void resetDeadlineMiss();
   std::vector<int> getUseCores();
   int getPriority();
+  int recheckGraph();
   void failSafeFunction();
   void runFailSafeFunction();
   bool isRunningFailSafeFunction();

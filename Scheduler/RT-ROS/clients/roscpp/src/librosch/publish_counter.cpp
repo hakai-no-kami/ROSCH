@@ -1,5 +1,10 @@
 #include "ros_rosch/publish_counter.h"
+#include "ros_rosch/node_graph.hpp"
 #include <iostream>
+
+template <class T>std::ostream &operator<<(std::ostream &o,const std::vector<T>&v)
+{o<<"{";for(int i=0;i<(int)v.size();i++)o<<(i>0?", ":"")<<v[i];o<<"}";return o;}
+
 using namespace rosch;
 
 SingletonSchedNodeManager::SingletonSchedNodeManager()
@@ -24,7 +29,10 @@ void SingletonSchedNodeManager::subPollTime(int time_ms) {
   poll_time_ms_ = (poll_time_ms_ - time_ms) < 0 ? 0 : (poll_time_ms_ - time_ms);
 }
 int SingletonSchedNodeManager::getPollTime() { return poll_time_ms_; }
-NodeInfo SingletonSchedNodeManager::getNodeInfo() { return node_info_; }
+NodeInfo SingletonSchedNodeManager::getNodeInfo() { 
+  std::cout << "get node info ssm" << std::endl;
+  return node_info_; 
+}
 void SingletonSchedNodeManager::init(const NodeInfo &node_info) {
   setNodeInfo(node_info);
   resetPollTime();
@@ -47,12 +55,23 @@ void SingletonSchedNodeManager::setPublishEvenIfMissedDeadline(
     bool can_publish) {
   publish_even_if_missed_deadline_ = can_publish;
 }
+int SingletonSchedNodeManager::recheckGraph() {
+  return 1;
+}
 void SingletonSchedNodeManager::failSafeFunction() {
+    std::cout << NodeInfo.v_node_list << std::endl;
     if (node_info_.v_subtopic.size() > 0){
       std::cout << node_info_.v_sched_info.at(0).ignorable << std::endl;
       if(node_info_.v_sched_info.at(0).ignorable == 1){
         std::cout << "deadline miss but ignored" << std::endl;
-        setPublishEvenIfMissedDeadline(false);
+        setPublishEvenIfMissedDeadline(true);
+        int ret = recheckGraph();
+        if (ret != 1){
+
+        }
+        else{
+
+        }
       }
       else{
         std::cout << "unignorable deadline miss" << std::endl;

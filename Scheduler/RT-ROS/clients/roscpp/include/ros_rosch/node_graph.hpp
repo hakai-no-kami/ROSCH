@@ -9,20 +9,21 @@
 #include <vector>
 
 namespace rosch {
-class NodesInfo {
-public:
-    NodesInfo();
-    NodesInfo(const std::string &filename);
-    ~NodesInfo();
-    NodeInfo getNodeInfo(const int index);
-    NodeInfo getNodeInfo(const std::string name);
-    size_t getNodeListSize(void);
-private:
-  Config config_;
-  void loadConfig(const std::string &filename);
-  void createEmptyNodeInfo(NodeInfo *node_info);
-  std::vector<NodeInfo> v_node_info_;
-};
+  class NodesInfo {
+    public:
+        NodesInfo();
+        NodesInfo(const std::string &filename);
+        ~NodesInfo();
+        NodeInfo getNodeInfo(const int index);
+        NodeInfo getNodeInfo(const std::string name);
+        size_t getNodeListSize(void);
+        std::vector<NodeInfo> v_node_info_;
+        std::vector<NodeInfo*> v_node_list;
+    private:
+      Config config_;
+      void loadConfig(const std::string &filename);
+      void createEmptyNodeInfo(NodeInfo *node_info);
+  };
 }
 
 #endif // NODE_GRAPH_HPP

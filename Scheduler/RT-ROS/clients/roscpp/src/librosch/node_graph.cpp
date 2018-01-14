@@ -7,6 +7,7 @@
 
 using namespace rosch;
 
+
 NodesInfo::NodesInfo() : v_node_info_(0), config_() {
   std::string filename(config_.get_configpath());
   loadConfig(std::string("/tmp/scheduler_rosch.yaml"));
@@ -20,6 +21,7 @@ void NodesInfo::loadConfig(const std::string &filename) {
   try {
     YAML::Node node_list;
     node_list = YAML::LoadFile(filename);
+    int ignorable_flag;
     for (unsigned int i(0); i < node_list.size(); i++) {
       const YAML::Node name = node_list[i]["nodename"];
 //      const YAML::Node index = node_list[i]["nodeindex"];
@@ -63,9 +65,12 @@ void NodesInfo::loadConfig(const std::string &filename) {
         // sched_info_element.end_time = sched_info_element.start_time +
         // sched_info_element.run_time;
    	    node_info.v_sched_info.push_back(sched_info_element);
+        ignorable_flag = sched_info[idx]["ignorable"].as<int>();
       }
-
       v_node_info_.push_back(node_info);
+      if (ignorable_flag != 1){
+        v_node_list.push_back(&node_info);
+      }
     }
   } catch (YAML::Exception &e) {
     std::cerr << e.what() << std::endl;
@@ -73,6 +78,7 @@ void NodesInfo::loadConfig(const std::string &filename) {
 }
 
 NodeInfo NodesInfo::getNodeInfo(const int index) {
+  std::cout << "get node info ng index" << std::endl;
   try {
     for (int idx(0); idx < v_node_info_.size(); ++idx) {
       if (v_node_info_.at(idx).index == index)
@@ -89,6 +95,7 @@ NodeInfo NodesInfo::getNodeInfo(const int index) {
 }
 
 NodeInfo NodesInfo::getNodeInfo(const std::string name) {
+  std::cout << "get node info ng name" << std::endl;
   try {
     for (int idx(0); idx < v_node_info_.size(); ++idx) {
       if (v_node_info_.at(idx).name == name)

@@ -73,7 +73,7 @@
 #include "ros_rosch/task_attribute_processer.h"
 #include "ros_rosch/type.h"
 #include "ros_rosch/bridge.hpp"
-#if 0
+#if 1
 // RESCHECULER SCHED_DEADLINE
 // #define _GNU_SOURCE
 #include <linux/kernel.h>
@@ -126,10 +126,10 @@ int sched_getattr(pid_t pid, struct sched_attr *attr, unsigned int size,
 }
 
 #endif
-//#define __RESCH_DEBUG__
+#define __RESCH_DEBUG__
 /* Node graph */
-//#include "ros_rosch/node_graph.hpp"
-//#include "ros_rosch/bridge.hpp"
+#include "ros_rosch/node_graph.hpp"
+#include "ros_rosch/bridge.hpp"
 
 namespace ros {
 

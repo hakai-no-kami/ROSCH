@@ -14,6 +14,7 @@ typedef struct SchedInfo {
   int group;
 } SchedInfo;
 
+
 typedef struct NodeInfo {
   std::string name;
   int index;
@@ -24,5 +25,9 @@ typedef struct NodeInfo {
 	bool is_single_process;
 	int period_count;
 } NodeInfo;
+
+// typedef struct ImportantNodes{
+//   std::vector<NodeInfo*> v_node_list;
+// } ImportantNodes;
 
 #endif // TYPE_H
